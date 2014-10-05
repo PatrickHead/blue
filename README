@@ -1,6 +1,60 @@
 
-blue
-========
+blue project
+============
 
-<DETAILS ABOUT blue GO HERE>
+The blue project consists of two main components:
+
+  1) The blue library
+  2) The blue command line utilities
+
+
+The blue library
+----------------
+
+The blue library is a collection of functions to assist in the automation of
+engineering and mechanical drawings.  The blue library maintains the state of
+a drawing, allowing for additions, deletions, and changes to made that that
+drawing.  The drawing can be saved persistently in a structured XML format,
+and restored from that same format.
+
+The blue library is a C language library that is intended to be used for custom
+user applications as well as the library used by the blue command line
+utilities.  Also, the blue C library can be incorporated into other popular
+languages such as Python, Ruby, PERL, JAVA, etc.  While blue library is coded
+purely in C, the design of the library uses many object oriented concepts, and
+therefore should not be too difficult to be wrapped as an object oriented library into other languages.  
+
+Since the blue storage format is XML, the conversion to and from other
+popular and standard drawing formats should be mostly straightforward.  These
+conversions may be accomplished by dedicated translation libraries and
+utilities, or by using generic methods such as XML transforms.
+
+The blue command line utilities
+-------------------------------
+
+The blue command line utilities are a collection of commands that allow a
+user to create, edit and manage a blue drawing from the command line.
+Individual commands exist for each blue drawing component and are intended
+to be used in the same hierachical fashion as the blue library itself.  The
+commands accept options to create and edit each component configuration
+element.  Also, the commands accept blueXML format input and produce blueXML
+output.
+
+The blue commands are somewhat unique in that they can accept STDIO input and
+produce STDIO output using a sieve filtering technique.  The sieve filtering
+techniques allows blue commands to be used in sophisticated command pipelines
+that can produce a complete blue drawing, including collection multiple drawing
+components into larger collections of drawing components.  For instance,
+a drawing layer can contain many components, such as text and lines.  Many
+text and line components can be fed to a the command for a blue layer and
+collected by that blue layer, producing a blue layer that contains the text
+and lines.  This layer would then be output in blueXML format.  Entire
+drawing can be built up from the command line using standard scripting
+techniques.
+
+The blue library is used by the blue command line utilities and possibly
+other applications.
+
+Also, a complete set of user guide, tutorial, manpages, and reference manual
+can be built and installed from these sources.
 
