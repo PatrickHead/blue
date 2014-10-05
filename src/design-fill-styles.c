@@ -11,7 +11,7 @@ design_fill_styles_s *design_fill_styles_create(void)
   fs = (design_fill_styles_s *)malloc(sizeof(design_fill_styles_s));
   memset(fs, 0, sizeof(design_fill_styles_s));
 
-  fs->fill_styles = list_new();
+  fs->fill_styles = list_create();
   list_set_free(fs->fill_styles, design_fill_style_destroy_void);
 
   return fs;

@@ -175,7 +175,7 @@ design_fill_style_s *design_fill_style_sieve(FILE *infile, FILE *outfile)
 
   if (!infile) return NULL;
 
-  dl = doc_list_new(infile,
+  dl = doc_list_create(infile,
                     "<?xml[^<]*?>",
                     "<fill-style[^<]*>.*</fill-style>"
                     "|<color[^<]*/>");

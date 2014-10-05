@@ -120,7 +120,7 @@ design_line_s *design_line_sieve(FILE *infile, FILE *outfile)
 
   if (!infile) return NULL;
 
-  dl = doc_list_new(infile,
+  dl = doc_list_create(infile,
                     "<?xml[^<]*?>",
                     "<line[^<]*>.*</line>"
                     "|<vertex[^<]*/>"

@@ -30,8 +30,7 @@ AC_CHECK_FUNCS([ memset mkdir strchr strdup strtol ])
 # Checks for required packages
 PKG_CHECK_MODULES(GRAY, libgray >= 0.1)
 PKG_CHECK_MODULES(XML, libxml-2.0 >= 2.9)
-PKG_CHECK_MODULES(CAIRO, cairo >= 0.25)
-PKG_CHECK_MODULES(PANGO, pango >= 0.25)
+PKG_CHECK_MODULES(GTK, gtk+-3.0 >= 3.6.0)
 
 AC_CONFIG_FILES([ Makefile tools/Makefile include/Makefile src/Makefile tests/Makefile doc/Makefile doc/reference-manual/Makefile ])
 

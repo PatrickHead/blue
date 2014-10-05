@@ -134,7 +134,7 @@ border_s *border_sieve(FILE *infile, FILE *outfile)
 
   if (!infile) return NULL;
 
-  dl = doc_list_new(infile,
+  dl = doc_list_create(infile,
                     "<?xml[^<]*?>",
                     "<border[^<]*>.*</border>"
                     "|<margins[^<]*>.*</margins>"

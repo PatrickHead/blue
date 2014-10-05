@@ -11,7 +11,7 @@ design_layers_s *design_layers_create(void)
   ls = (design_layers_s *)malloc(sizeof(design_layers_s));
   memset(ls, 0, sizeof(design_layers_s));
 
-  ls->layers = list_new();
+  ls->layers = list_create();
   list_set_free(ls->layers, design_layer_destroy_void);
 
   return ls;
@@ -39,7 +39,7 @@ design_layers_s *design_layers_copy(design_layers_s *ls)
 
   if (ls->layers)
   {
-    nls->layers = list_new();
+    nls->layers = list_create();
     for (l = (design_layer_s *)list_head(ls->layers);
          l;
          l = (design_layer_s *)list_next(ls->layers))

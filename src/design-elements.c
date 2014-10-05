@@ -11,7 +11,7 @@ design_elements_s *design_elements_create(void)
   es = (design_elements_s *)malloc(sizeof(design_elements_s));
   memset(es, 0, sizeof(design_elements_s));
 
-  es->elements = list_new();
+  es->elements = list_create();
   list_set_free(es->elements, design_element_destroy_void);
 
   return es;
@@ -39,7 +39,7 @@ design_elements_s *design_elements_copy(design_elements_s *es)
 
   if (es->elements)
   {
-    nes->elements = list_new();
+    nes->elements = list_create();
     for (e = (design_element_s *)list_head(es->elements);
          e;
          e = (design_element_s *)list_next(es->elements))

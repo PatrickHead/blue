@@ -12,7 +12,7 @@ design_line_style_segments_s *design_line_style_segments_create(void)
     (design_line_style_segments_s *)malloc(sizeof(design_line_style_segments_s));
   memset(lsss, 0, sizeof(design_line_style_segments_s));
 
-  lsss->line_style_segments = list_new();
+  lsss->line_style_segments = list_create();
   list_set_free(lsss->line_style_segments,
                 design_line_style_segment_destroy_void);
 
@@ -40,7 +40,7 @@ design_line_style_segments_s *design_line_style_segments_copy(
 
   if (lsss->line_style_segments)
   {
-    nlsss->line_style_segments = list_new();
+    nlsss->line_style_segments = list_create();
     for (lss =
           (design_line_style_segment_s *)list_head(lsss->line_style_segments);
          lss;

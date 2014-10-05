@@ -12,7 +12,7 @@ void design_defaults_init(void)
 {
   if (!_g_list)
   {
-    _g_list = list_new();
+    _g_list = list_create();
     if (!_g_list) return;
     list_set_free(_g_list, design_defaults_destroy_void);
   }

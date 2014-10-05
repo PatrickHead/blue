@@ -111,7 +111,7 @@ design_point_s *design_point_sieve(FILE *infile, FILE *outfile)
 
   if (!infile) return NULL;
 
-  dl = doc_list_new(infile,
+  dl = doc_list_create(infile,
                     "<?xml[^<]*?>",
                     "<point[^<]*>.*</point>"
                     "|<vertex[^<]*/>"

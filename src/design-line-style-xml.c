@@ -120,7 +120,7 @@ design_line_style_s *design_line_style_sieve(FILE *infile, FILE *outfile)
 
   if (!infile) return NULL;
 
-  dl = doc_list_new(infile,
+  dl = doc_list_create(infile,
                     "<?xml[^<]*?>",
                     "<line-style[^<]*>.*</line-style>"
                     "|<line-style-segments[^<]*>.*</line-style-segments>");

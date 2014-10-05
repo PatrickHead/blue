@@ -109,7 +109,7 @@ design_polyline_s *design_polyline_sieve(FILE *infile, FILE *outfile)
 
   if (!infile) return NULL;
 
-  dl = doc_list_new(infile,
+  dl = doc_list_create(infile,
                     "<?xml[^<]*?>",
                     "<polyline[^<]*>.*</polyline>"
                     "|<vertices[^<]*>.*</vertices>"

@@ -27,7 +27,7 @@ design_line_styles_s *_create(void)
   ls = (design_line_styles_s *)malloc(sizeof(design_line_styles_s));
   memset(ls, 0, sizeof(design_line_styles_s));
 
-  ls->line_styles = list_new();
+  ls->line_styles = list_create();
   list_set_free(ls->line_styles, design_line_style_destroy_void);
 
   return ls;

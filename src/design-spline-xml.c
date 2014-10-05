@@ -109,7 +109,7 @@ design_spline_s *design_spline_sieve(FILE *infile, FILE *outfile)
 
   if (!infile) return NULL;
 
-  dl = doc_list_new(infile,
+  dl = doc_list_create(infile,
                     "<?xml[^<]*?>",
                     "<spline[^<]*>.*</spline>"
                     "|<vertices[^<]*>.*</vertices>"

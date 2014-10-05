@@ -118,7 +118,7 @@ design_elements_s *design_elements_sieve(FILE *infile, FILE *outfile)
 
   if (!infile) return NULL;
 
-  dl = doc_list_new(infile,
+  dl = doc_list_create(infile,
                     "<?xml[^<]*?>",
                     "<elements[^<]*>.*</elements>"
                     "|<element[^<]*>.*</element>");
