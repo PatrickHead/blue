@@ -16,7 +16,19 @@ AM_PROG_CC_C_O
 # Checks for libraries.
 
 # Checks for header files.
-AC_CHECK_HEADERS([ ctype.h errno.h getopt.h libgen.h stdio.h stdlib.h string.h sys/stat.h sys/types.h time.h unistd.h ])
+AC_CHECK_HEADERS([
+  ctype.h
+  errno.h
+  getopt.h
+  libgen.h
+  stdio.h
+  stdlib.h
+  string.h
+  sys/stat.h
+  sys/types.h
+  time.h
+  unistd.h
+])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_CHECK_HEADER_STDBOOL
@@ -32,6 +44,14 @@ PKG_CHECK_MODULES(GRAY, libgray >= 0.1)
 PKG_CHECK_MODULES(XML, libxml-2.0 >= 2.9)
 PKG_CHECK_MODULES(GTK, gtk+-3.0 >= 3.6.0)
 
-AC_CONFIG_FILES([ Makefile tools/Makefile include/Makefile src/Makefile tests/Makefile doc/Makefile doc/reference-manual/Makefile ])
+AC_CONFIG_FILES([
+  Makefile
+  tools/Makefile
+  include/Makefile
+  src/Makefile
+  tests/Makefile
+  doc/Makefile
+  doc/reference-manual/Makefile
+])
 
 AC_OUTPUT
