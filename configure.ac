@@ -16,19 +16,7 @@ AM_PROG_CC_C_O
 # Checks for libraries.
 
 # Checks for header files.
-AC_CHECK_HEADERS([
-  ctype.h
-  errno.h
-  getopt.h
-  libgen.h
-  stdio.h
-  stdlib.h
-  string.h
-  sys/stat.h
-  sys/types.h
-  time.h
-  unistd.h
-])
+AC_CHECK_HEADERS([ ctype.h errno.h getopt.h libgen.h stdio.h stdlib.h string.h sys/stat.h sys/types.h time.h unistd.h ])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_CHECK_HEADER_STDBOOL

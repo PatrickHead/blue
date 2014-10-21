@@ -1,9 +1,49 @@
+/*!
+    @file design-line-style-segment-xml.c
+
+    @brief SOURCE_BRIEF
+
+    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+
+    @author Patrick Head  mailto:patrickhead@gmail.com
+
+    @copyright Copyright (C) 2014  Patrick Head
+
+    @license
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.@n
+    @n
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.@n
+    @n
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+  /*!
+
+    @file design-line-style-segment-xml.c
+
+    SOURCE_BRIEF
+
+    SOURCE_DETAILS
+
+  */
+
+  // Required system headers
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
+
+  // Project related headers
 
 #include "xml-extensions.h"
 #include "doc-list.h"
@@ -13,11 +53,25 @@
 
 #define MAX_SN 40
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 xmlDocPtr design_line_style_segment_to_xml_doc(design_line_style_segment_s *lss)
 {
   xmlDocPtr doc = NULL;
   xmlNodePtr root = NULL;
 
+    // Sanity check parameters.
   assert(lss);
 
   doc = xmlNewDoc(BAD_CAST "1.0");
@@ -26,14 +80,29 @@ xmlDocPtr design_line_style_segment_to_xml_doc(design_line_style_segment_s *lss)
 
   xmlDocSetRootElement(doc, root);
 
+    // Return RETVAL
   return doc;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 xmlNodePtr design_line_style_segment_to_xml_node(design_line_style_segment_s *lss)
 {
   xmlNodePtr n = NULL;
   char sn[MAX_SN];
 
+    // Sanity check parameters.
   assert(lss);
 
   n = xmlNewNode(NULL, BAD_CAST "line-style-segment");
@@ -42,25 +111,69 @@ xmlNodePtr design_line_style_segment_to_xml_node(design_line_style_segment_s *ls
   snprintf(sn, MAX_SN, "%f", lss->length);
   xmlNewChild(n, NULL, BAD_CAST "length", BAD_CAST sn);
 
+    // Return RETVAL
   return n;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 xmlNodePtr design_line_style_segment_root_node(xmlDocPtr doc)
 {
+    // Sanity check parameters.
   assert(doc);
+    // Return RETVAL
   return xmlDocGetRootElement(doc);
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 design_line_style_segment_s *design_line_style_segment_from_xml_doc(xmlDocPtr doc)
 {
   xmlNodePtr root;
 
+    // Sanity check parameters.
   assert(doc);
 
   root = design_line_style_segment_root_node(doc);
 
+    // Return RETVAL
   return design_line_style_segment_from_xml_node(root);
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 design_line_style_segment_s *design_line_style_segment_from_xml_node(
   xmlNodePtr node)
@@ -68,6 +181,7 @@ design_line_style_segment_s *design_line_style_segment_from_xml_node(
   xmlNodePtr value;
   design_line_style_segment_s *lss;
 
+    // Sanity check parameters.
   assert(node);
 
   if (strcmp((char*)node->name, "line-style-segment")) return NULL;
@@ -88,8 +202,22 @@ design_line_style_segment_s *design_line_style_segment_from_xml_node(
     }
   }
 
+    // Return RETVAL
   return lss;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 design_line_style_segment_s *design_line_style_segment_sieve(FILE *infile,
                                                              FILE *outfile)
@@ -149,6 +277,7 @@ design_line_style_segment_s *design_line_style_segment_sieve(FILE *infile,
     }
   }
 
+    // Return RETVAL
   return lss;
 }
 

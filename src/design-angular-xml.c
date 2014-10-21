@@ -1,9 +1,49 @@
+/*!
+    @file design-angular-xml.c
+
+    @brief SOURCE_BRIEF
+
+    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+
+    @author Patrick Head  mailto:patrickhead@gmail.com
+
+    @copyright Copyright (C) 2014  Patrick Head
+
+    @license
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.@n
+    @n
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.@n
+    @n
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+  /*!
+
+    @file design-angular-xml.c
+
+    SOURCE_BRIEF
+
+    SOURCE_DETAILS
+
+  */
+
+  // Required system headers
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
+
+  // Project related headers
 
 #include "xml-extensions.h"
 #include "doc-list.h"
@@ -15,11 +55,25 @@
 
 #define MAX_SN 40
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 xmlDocPtr design_angular_to_xml_doc(design_angular_s *a)
 {
   xmlDocPtr doc = NULL;
   xmlNodePtr root = NULL;
 
+    // Sanity check parameters.
   assert(a);
 
   doc = xmlNewDoc(BAD_CAST "1.0");
@@ -28,8 +82,22 @@ xmlDocPtr design_angular_to_xml_doc(design_angular_s *a)
 
   xmlDocSetRootElement(doc, root);
 
+    // Return RETVAL
   return doc;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 xmlNodePtr design_angular_to_xml_node(design_angular_s *a)
 {
@@ -37,6 +105,7 @@ xmlNodePtr design_angular_to_xml_node(design_angular_s *a)
   xmlNodePtr vn = NULL;
   char sn[MAX_SN];
 
+    // Sanity check parameters.
   assert(a);
 
   n = xmlNewNode(NULL, BAD_CAST "angular");
@@ -72,31 +141,76 @@ xmlNodePtr design_angular_to_xml_node(design_angular_s *a)
   snprintf(sn, MAX_SN, "%f", a->extension);
   xmlNewChild(n, NULL, BAD_CAST "extension", BAD_CAST sn);
 
+    // Return RETVAL
   return n;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 xmlNodePtr design_angular_root_node(xmlDocPtr doc)
 {
+    // Sanity check parameters.
   assert(doc);
+    // Return RETVAL
   return xmlDocGetRootElement(doc);
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 design_angular_s *design_angular_from_xml_doc(xmlDocPtr doc)
 {
   xmlNodePtr root;
 
+    // Sanity check parameters.
   assert(doc);
 
   root = design_angular_root_node(doc);
 
+    // Return RETVAL
   return design_angular_from_xml_node(root);
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 design_angular_s *design_angular_from_xml_node(xmlNodePtr node)
 {
   xmlNodePtr value;
   design_angular_s *a;
 
+    // Sanity check parameters.
   assert(node);
 
   if (strcmp((char*)node->name, "angular")) return NULL;
@@ -133,8 +247,22 @@ design_angular_s *design_angular_from_xml_node(xmlNodePtr node)
     }
   }
 
+    // Return RETVAL
   return a;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 design_angular_s *design_angular_sieve(FILE *infile, FILE *outfile)
 {
@@ -234,6 +362,7 @@ design_angular_s *design_angular_sieve(FILE *infile, FILE *outfile)
     }
   }
 
+    // Return RETVAL
   return a;
 }
 

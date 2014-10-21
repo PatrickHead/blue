@@ -1,10 +1,63 @@
+/*!
+    @file paper.c
+
+    @brief SOURCE_BRIEF
+
+    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+
+    @author Patrick Head  mailto:patrickhead@gmail.com
+
+    @copyright Copyright (C) 2014  Patrick Head
+
+    @license
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.@n
+    @n
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.@n
+    @n
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+  /*!
+
+    @file paper.c
+
+    SOURCE_BRIEF
+
+    SOURCE_DETAILS
+
+  */
+
+  // Required system headers
+
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 
+  // Project related headers
+
 #include "paper.h"
 
 static void dimensions(paper_s *paper);
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 paper_s *paper_create(void)
 {
@@ -25,22 +78,52 @@ paper_s *paper_create(void)
   color_set_tag(p->color, "color");
   color_white(p->color);
 
+    // Return RETVAL
   return p;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void paper_destroy(paper_s *p)
 {
+    // Sanity check parameters.
   assert(p);
   if (p->margins) margins_destroy(p->margins);
   if (p->color) color_destroy(p->color);
   free(p);
+    // Return RETVAL
   return;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 paper_s *paper_copy(paper_s *p)
 {
   paper_s *np;
 
+    // Sanity check parameters.
   assert(p);
 
   np = paper_create();
@@ -49,8 +132,22 @@ paper_s *paper_copy(paper_s *p)
   if (p->margins) np->margins = margins_copy(p->margins);
   if (p->color) np->color = color_copy(p->color);
 
+    // Return RETVAL
   return np;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 void paper_set(paper_s *p,
                units_t units,
@@ -61,6 +158,7 @@ void paper_set(paper_s *p,
                double height,
                color_s *color)
 {
+    // Sanity check parameters.
   assert(p);
   assert(margins);
   assert(color);
@@ -74,6 +172,19 @@ void paper_set(paper_s *p,
   paper_set_color(p, color);
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void paper_get(paper_s *p,
                units_t *units,
                paper_size_t *size,
@@ -83,6 +194,7 @@ void paper_get(paper_s *p,
                double *height,
                color_s **color)
 {
+    // Sanity check parameters.
   assert(p);
   assert(units);
   assert(size);
@@ -101,21 +213,64 @@ void paper_get(paper_s *p,
   *color = paper_get_color(p);
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void paper_set_units(paper_s *p, units_t ut)
 {
+    // Sanity check parameters.
   assert(p);
   p->units = ut;
   dimensions(p);
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 units_t paper_get_units(paper_s *p)
 {
+    // Sanity check parameters.
   assert(p);
+    // Return RETVAL
   return p->units;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void paper_set_size(paper_s *p, paper_size_t st)
 {
+    // Sanity check parameters.
   assert(p);
   p->size = st;
   dimensions(p);
@@ -151,67 +306,212 @@ void paper_set_size(paper_s *p, paper_size_t st)
   }
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 paper_size_t paper_get_size(paper_s *p)
 {
+    // Sanity check parameters.
   assert(p);
+    // Return RETVAL
   return p->size;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void paper_set_orientation(paper_s *p, paper_orientation_t o)
 {
+    // Sanity check parameters.
   assert(p);
   p->orientation = o;
   dimensions(p);
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 paper_orientation_t paper_get_orientation(paper_s *p)
 {
+    // Sanity check parameters.
   assert(p);
+    // Return RETVAL
   return p->orientation;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void paper_set_margins(paper_s *p, margins_s *m)
 {
+    // Sanity check parameters.
   assert(p);
   assert(m);
   if (p->margins) margins_destroy(p->margins);
   p->margins = m;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 margins_s *paper_get_margins(paper_s *p)
 {
+    // Sanity check parameters.
   assert(p);
+    // Return RETVAL
   return p->margins;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void paper_set_width(paper_s *p, double width)
 {
+    // Sanity check parameters.
   assert(p);
   p->width = width;
   paper_set_size(p, paper_size_type_user_defined);
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 double paper_get_width(paper_s *p)
 {
+    // Sanity check parameters.
   assert(p);
+    // Return RETVAL
   return p->width;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void paper_set_height(paper_s *p, double height)
 {
+    // Sanity check parameters.
   assert(p);
   p->height = height;
   paper_set_size(p, paper_size_type_user_defined);
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 double paper_get_height(paper_s *p)
 {
+    // Sanity check parameters.
   assert(p);
+    // Return RETVAL
   return p->height;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void paper_set_color(paper_s *p, color_s *color)
 {
+    // Sanity check parameters.
   assert(p);
   assert(color);
   if (p->color) color_destroy(p->color);
@@ -219,11 +519,39 @@ void paper_set_color(paper_s *p, color_s *color)
   color_set_tag(p->color, "color");
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 color_s *paper_get_color(paper_s *p)
 {
+    // Sanity check parameters.
   assert(p);
+    // Return RETVAL
   return p->color;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 char* paper_size2str(paper_size_t type)
 {
@@ -253,11 +581,26 @@ char* paper_size2str(paper_size_t type)
     case paper_size_type_user_defined: return "user-defined";
   }
 
+    // Return RETVAL
   return "iso-a1";
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 paper_size_t str2paper_size(char* s)
 {
+    // Sanity check parameters.
   assert(s);
 
   if (!strcmp(s, "iso-a0")) return paper_size_type_iso_a0;
@@ -282,8 +625,22 @@ paper_size_t str2paper_size(char* s)
   if (!strcmp(s, "legal")) return paper_size_type_legal;
   if (!strcmp(s, "tabloid")) return paper_size_type_tabloid;
 
+    // Return RETVAL
   return paper_size_type_iso_a1;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 char* paper_orientation2str(paper_orientation_t type)
 {
@@ -293,16 +650,32 @@ char* paper_orientation2str(paper_orientation_t type)
     case paper_orientation_type_landscape: return "landscape";
   }
 
+    // Return RETVAL
   return "portrait";
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 paper_orientation_t str2paper_orientation(char* s)
 {
+    // Sanity check parameters.
   assert(s);
 
   if (!strcmp(s, "portrait")) return paper_orientation_type_portrait;
   if (!strcmp(s, "landscape")) return paper_orientation_type_landscape;
 
+    // Return RETVAL
   return paper_orientation_type_portrait;
 }
 

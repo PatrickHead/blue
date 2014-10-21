@@ -1,9 +1,49 @@
+/*!
+    @file blue-design-elements.c
+
+    @brief SOURCE_BRIEF
+
+    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+
+    @author Patrick Head  mailto:patrickhead@gmail.com
+
+    @copyright Copyright (C) 2014  Patrick Head
+
+    @license
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.@n
+    @n
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.@n
+    @n
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+  /*!
+
+    @file blue-design-elements.c
+
+    SOURCE_BRIEF
+
+    SOURCE_DETAILS
+
+  */
+
+  // Required system headers
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <getopt.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
+
+  // Project related headers
 
 #include "xml-extensions.h"
 
@@ -15,6 +55,19 @@
 
 static void version(void);
 static void usage(void);
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 int main(int argc, char** argv)
 {
@@ -59,11 +112,13 @@ int main(int argc, char** argv)
 
       case 'v':
         version();
-        return 0;
+          // Return RETVAL
+  return 0;
 
       case 'h':
         usage();
-        return 0;
+          // Return RETVAL
+  return 0;
 
       case '?':
       default:
@@ -100,14 +155,16 @@ int main(int argc, char** argv)
   if (blue_design_elements_check(es))
   {
     blue_design_elements_check_error();
-    return -1;
+      // Return RETVAL
+  return -1;
   }
 
   doc = design_elements_to_xml_doc(es);
   if (!doc)
   {
     fprintf(stderr, "Error converting parameters to XML.\n");
-    return -1;
+      // Return RETVAL
+  return -1;
   }
 
   if (!out_file_name) out_file_name = strdup("-");
@@ -119,6 +176,7 @@ int main(int argc, char** argv)
 
   design_elements_destroy(es);
 
+    // Return RETVAL
   return 0;
 }
 

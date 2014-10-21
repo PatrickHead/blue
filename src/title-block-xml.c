@@ -1,3 +1,41 @@
+/*!
+    @file title-block-xml.c
+
+    @brief SOURCE_BRIEF
+
+    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+
+    @author Patrick Head  mailto:patrickhead@gmail.com
+
+    @copyright Copyright (C) 2014  Patrick Head
+
+    @license
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.@n
+    @n
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.@n
+    @n
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+  /*!
+
+    @file title-block-xml.c
+
+    SOURCE_BRIEF
+
+    SOURCE_DETAILS
+
+  */
+
+  // Required system headers
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,6 +43,8 @@
 #include <assert.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
+
+  // Project related headers
 
 #include "xml-extensions.h"
 #include "doc-list.h"
@@ -14,11 +54,25 @@
 
 #define MAX_SN 40
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 xmlDocPtr title_block_to_xml_doc(title_block_s *tb)
 {
   xmlDocPtr doc = NULL;
   xmlNodePtr root = NULL;
 
+    // Sanity check parameters.
   assert(tb);
 
   doc = xmlNewDoc(BAD_CAST "1.0");
@@ -27,8 +81,22 @@ xmlDocPtr title_block_to_xml_doc(title_block_s *tb)
 
   xmlDocSetRootElement(doc, root);
 
+    // Return RETVAL
   return doc;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 xmlNodePtr title_block_to_xml_node(title_block_s *tb)
 {
@@ -37,6 +105,7 @@ xmlNodePtr title_block_to_xml_node(title_block_s *tb)
   char sn[MAX_SN];
   struct tm *tm;
 
+    // Sanity check parameters.
   assert(tb);
 
   node = xmlNewNode(NULL, BAD_CAST "title-block");
@@ -75,24 +144,67 @@ xmlNodePtr title_block_to_xml_node(title_block_s *tb)
     xmlAddChild(node, xmlCopyNode(color_node, 1));
   xmlFreeNode(color_node);
 
+    // Return RETVAL
   return node;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 xmlNodePtr title_block_root_node(xmlDocPtr doc)
 {
+    // Return RETVAL
   return xmlDocGetRootElement(doc);
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 title_block_s *title_block_from_xml_doc(xmlDocPtr doc)
 {
   xmlNodePtr root;
 
+    // Sanity check parameters.
   assert(doc);
 
   root = title_block_root_node(doc);
 
+    // Return RETVAL
   return title_block_from_xml_node(root);
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 title_block_s *title_block_from_xml_node(xmlNodePtr node)
 {
@@ -100,13 +212,15 @@ title_block_s *title_block_from_xml_node(xmlNodePtr node)
   xmlNodePtr value;
   struct tm tm;
 
+    // Sanity check parameters.
   assert(node);
 
   tb = (title_block_s *)malloc(sizeof(title_block_s));
   memset(tb, 0, sizeof(title_block_s)); 
 
   if (strcmp((char*)node->name, "title-block"))
-    return NULL;
+      // Return RETVAL
+  return NULL;
 
   for (node = node->children; node; node = node->next)
   {
@@ -155,8 +269,22 @@ title_block_s *title_block_from_xml_node(xmlNodePtr node)
     }
   }
 
+    // Return RETVAL
   return tb;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 title_block_s *title_block_sieve(FILE *infile, FILE *outfile)
 {
@@ -249,6 +377,7 @@ title_block_s *title_block_sieve(FILE *infile, FILE *outfile)
     }
   }
 
+    // Return RETVAL
   return tb;
 }
 

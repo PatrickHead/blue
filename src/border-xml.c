@@ -1,9 +1,49 @@
+/*!
+    @file border-xml.c
+
+    @brief SOURCE_BRIEF
+
+    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+
+    @author Patrick Head  mailto:patrickhead@gmail.com
+
+    @copyright Copyright (C) 2014  Patrick Head
+
+    @license
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.@n
+    @n
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.@n
+    @n
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+  /*!
+
+    @file border-xml.c
+
+    SOURCE_BRIEF
+
+    SOURCE_DETAILS
+
+  */
+
+  // Required system headers
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
+
+  // Project related headers
 
 #include "xml-extensions.h"
 #include "doc-list.h"
@@ -13,11 +53,25 @@
 
 #define MAX_SN 40
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 xmlDocPtr border_to_xml_doc(border_s *b)
 {
   xmlDocPtr doc = NULL;
   xmlNodePtr root = NULL;
 
+    // Sanity check parameters.
   assert(b);
 
   doc = xmlNewDoc(BAD_CAST "1.0");
@@ -26,8 +80,22 @@ xmlDocPtr border_to_xml_doc(border_s *b)
 
   xmlDocSetRootElement(doc, root);
 
+    // Return RETVAL
   return doc;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 xmlNodePtr border_to_xml_node(border_s *b)
 {
@@ -36,6 +104,7 @@ xmlNodePtr border_to_xml_node(border_s *b)
   xmlNodePtr color_node = NULL;
   char sn[MAX_SN];
 
+    // Sanity check parameters.
   assert(b);
 
   node = xmlNewNode(NULL, BAD_CAST "border");
@@ -57,31 +126,76 @@ xmlNodePtr border_to_xml_node(border_s *b)
     xmlAddChild(node, xmlCopyNode(color_node, 1));
   xmlFreeNode(color_node);
 
+    // Return RETVAL
   return node;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 xmlNodePtr border_root_node(xmlDocPtr doc)
 {
+    // Sanity check parameters.
   assert(doc);
+    // Return RETVAL
   return xmlDocGetRootElement(doc);
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 border_s *border_from_xml_doc(xmlDocPtr doc)
 {
   xmlNodePtr root;
 
+    // Sanity check parameters.
   assert(doc);
 
   root = border_root_node(doc);
 
+    // Return RETVAL
   return border_from_xml_node(root);
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 border_s *border_from_xml_node(xmlNodePtr node)
 {
   border_s *b;
   xmlNodePtr value;
 
+    // Sanity check parameters.
   assert(node);
 
   b = (border_s *)malloc(sizeof(border_s));
@@ -118,8 +232,22 @@ border_s *border_from_xml_node(xmlNodePtr node)
     }
   }
 
+    // Return RETVAL
   return b;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 border_s *border_sieve(FILE *infile, FILE *outfile)
 {
@@ -218,6 +346,7 @@ border_s *border_sieve(FILE *infile, FILE *outfile)
     }
   }
 
+    // Return RETVAL
   return b;
 }
 

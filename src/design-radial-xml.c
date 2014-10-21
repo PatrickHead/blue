@@ -1,9 +1,49 @@
+/*!
+    @file design-radial-xml.c
+
+    @brief SOURCE_BRIEF
+
+    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+
+    @author Patrick Head  mailto:patrickhead@gmail.com
+
+    @copyright Copyright (C) 2014  Patrick Head
+
+    @license
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.@n
+    @n
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.@n
+    @n
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+  /*!
+
+    @file design-radial-xml.c
+
+    SOURCE_BRIEF
+
+    SOURCE_DETAILS
+
+  */
+
+  // Required system headers
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
+
+  // Project related headers
 
 #include "xml-extensions.h"
 #include "doc-list.h"
@@ -14,11 +54,25 @@
 
 #define MAX_SN 40
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 xmlDocPtr design_radial_to_xml_doc(design_radial_s *r)
 {
   xmlDocPtr doc = NULL;
   xmlNodePtr root = NULL;
 
+    // Sanity check parameters.
   assert(r);
 
   doc = xmlNewDoc(BAD_CAST "1.0");
@@ -27,8 +81,22 @@ xmlDocPtr design_radial_to_xml_doc(design_radial_s *r)
 
   xmlDocSetRootElement(doc, root);
 
+    // Return RETVAL
   return doc;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 xmlNodePtr design_radial_to_xml_node(design_radial_s *r)
 {
@@ -36,6 +104,7 @@ xmlNodePtr design_radial_to_xml_node(design_radial_s *r)
   xmlNodePtr vn = NULL;
   char sn[MAX_SN];
 
+    // Sanity check parameters.
   assert(r);
 
   n = xmlNewNode(NULL, BAD_CAST "radial");
@@ -62,25 +131,69 @@ xmlNodePtr design_radial_to_xml_node(design_radial_s *r)
   snprintf(sn, MAX_SN, "%f", r->leader);
   xmlNewChild(n, NULL, BAD_CAST "leader", BAD_CAST sn);
 
+    // Return RETVAL
   return n;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 xmlNodePtr design_radial_root_node(xmlDocPtr doc)
 {
+    // Sanity check parameters.
   assert(doc);
+    // Return RETVAL
   return xmlDocGetRootElement(doc);
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 design_radial_s *design_radial_from_xml_doc(xmlDocPtr doc)
 {
   xmlNodePtr root;
 
+    // Sanity check parameters.
   assert(doc);
 
   root = design_radial_root_node(doc);
 
+    // Return RETVAL
   return design_radial_from_xml_node(root);
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 design_radial_s *design_radial_from_xml_node(xmlNodePtr node)
 {
@@ -88,6 +201,7 @@ design_radial_s *design_radial_from_xml_node(xmlNodePtr node)
   design_radial_s *r;
   char *s;
 
+    // Sanity check parameters.
   assert(node);
 
   if (strcmp((char*)node->name, "radial")) return NULL;
@@ -126,8 +240,22 @@ design_radial_s *design_radial_from_xml_node(xmlNodePtr node)
     }
   }
 
+    // Return RETVAL
   return r;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 design_radial_s *design_radial_sieve(FILE *infile, FILE *outfile)
 {
@@ -213,6 +341,7 @@ design_radial_s *design_radial_sieve(FILE *infile, FILE *outfile)
     }
   }
 
+    // Return RETVAL
   return r;
 }
 

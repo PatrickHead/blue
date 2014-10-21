@@ -13,7 +13,7 @@ The blue library
 
 The blue library is a collection of functions to assist in the automation of
 engineering and mechanical drawings.  The blue library maintains the state of
-a drawing, allowing for additions, deletions, and changes to made that that
+a drawing, allowing for additions, deletions, and changes to made to that
 drawing.  The drawing can be saved persistently in a structured XML format,
 and restored from that same format.
 
@@ -42,15 +42,14 @@ output.
 
 The blue commands are somewhat unique in that they can accept STDIO input and
 produce STDIO output using a sieve filtering technique.  The sieve filtering
-techniques allows blue commands to be used in sophisticated command pipelines
-that can produce a complete blue drawing, including collection multiple drawing
-components into larger collections of drawing components.  For instance,
-a drawing layer can contain many components, such as text and lines.  Many
-text and line components can be fed to a the command for a blue layer and
-collected by that blue layer, producing a blue layer that contains the text
-and lines.  This layer would then be output in blueXML format.  Entire
-drawing can be built up from the command line using standard scripting
-techniques.
+technique allows blue commands to be used in sophisticated command pipelines
+that can produce a complete blue drawing, including collecting multiple drawing
+components into larger container drawing components.  For instance, a drawing
+layer can contain many components, such as text and lines.  Many text and line
+components can be fed to the command for a blue layer and collected by that
+blue layer, producing a blue layer that contains the text and lines.  This
+layer would then be output in blueXML format.  Entire drawings can be built up
+from the command line using standard scripting techniques.
 
 The blue library is used by the blue command line utilities and possibly
 other applications.

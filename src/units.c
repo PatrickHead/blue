@@ -1,11 +1,65 @@
+/*!
+    @file units.c
+
+    @brief SOURCE_BRIEF
+
+    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+
+    @author Patrick Head  mailto:patrickhead@gmail.com
+
+    @copyright Copyright (C) 2014  Patrick Head
+
+    @license
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.@n
+    @n
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.@n
+    @n
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+  /*!
+
+    @file units.c
+
+    SOURCE_BRIEF
+
+    SOURCE_DETAILS
+
+  */
+
+  // Required system headers
+
 #include <string.h>
 #include <assert.h>
 #include <math.h>
 
+  // Project related headers
+
 #include "units.h"
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 units_t str2units(char* s)
 {
+    // Sanity check parameters.
   assert(s);
 
   if (!strcmp(s, "NONE")) return units_type_none;
@@ -76,6 +130,7 @@ units_t str2units(char* s)
   if (!strcmp(s, "point")) return units_type_point;
   if (!strcmp(s, "pt")) return units_type_point;
 
+    // Return RETVAL
   return units_type_none;
 }
 
@@ -122,8 +177,22 @@ const char* units2str(units_t t)
     default: break;
   }
 
+    // Return RETVAL
   return "m";
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 double units_convert(double value, units_t from_type, units_t to_type)
 {
@@ -209,6 +278,7 @@ double units_convert(double value, units_t from_type, units_t to_type)
     case units_type_point: value *= (39.3701 * 72.0); break;
   }
 
+    // Return RETVAL
   return value;
 }
 

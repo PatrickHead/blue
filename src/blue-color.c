@@ -1,9 +1,49 @@
+/*!
+    @file blue-color.c
+
+    @brief SOURCE_BRIEF
+
+    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+
+    @author Patrick Head  mailto:patrickhead@gmail.com
+
+    @copyright Copyright (C) 2014  Patrick Head
+
+    @license
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.@n
+    @n
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.@n
+    @n
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+  /*!
+
+    @file blue-color.c
+
+    SOURCE_BRIEF
+
+    SOURCE_DETAILS
+
+  */
+
+  // Required system headers
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <getopt.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
+
+  // Project related headers
 
 #include "color-xml.h"
 
@@ -16,6 +56,19 @@
 
 static void version(void);
 static void usage(void);
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 int main(int argc, char** argv)
 {
@@ -62,11 +115,13 @@ int main(int argc, char** argv)
 
       case 'v':
         version();
-        return 0;
+          // Return RETVAL
+  return 0;
 
       case 'h':
         usage();
-        return 0;
+          // Return RETVAL
+  return 0;
 
       case '?':
       default:
@@ -104,14 +159,16 @@ int main(int argc, char** argv)
   {
     blue_color_check_error();
     free(in_file_name);
-    return -1;
+      // Return RETVAL
+  return -1;
   }
 
   doc = color_to_xml_doc(color);
   if (!doc)
   {
     fprintf(stderr, "Error converting parameters to XML.\n");
-    return -1;
+      // Return RETVAL
+  return -1;
   }
 
   xmlDocFormatDumpEnc(outfile, doc, "UTF-8", 1);
@@ -119,6 +176,7 @@ int main(int argc, char** argv)
   xmlFreeDoc(doc);
   xmlCleanupParser();
 
+    // Return RETVAL
   return 0;
 }
 

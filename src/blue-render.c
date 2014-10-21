@@ -1,3 +1,41 @@
+/*!
+    @file blue-render.c
+
+    @brief SOURCE_BRIEF
+
+    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+
+    @author Patrick Head  mailto:patrickhead@gmail.com
+
+    @copyright Copyright (C) 2014  Patrick Head
+
+    @license
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.@n
+    @n
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.@n
+    @n
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+  /*!
+
+    @file blue-render.c
+
+    SOURCE_BRIEF
+
+    SOURCE_DETAILS
+
+  */
+
+  // Required system headers
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,10 +49,16 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
+  // Project related headers
+
 #include "drawing-xml.h"
 #include "render-2d-cairo.h"
 
 #define LOCAL_OPTION_BASE 10000
+
+  /*!
+    brief TYPEDEF_BRIEF
+  */
 
 typedef enum
 {
@@ -23,11 +67,19 @@ typedef enum
   blue_option_output_file_name
 } blue_option;
 
+  /*!
+    brief TYPEDEF_BRIEF
+  */
+
 typedef enum
 {
   blue_backend_type_cairo,
   blue_backend_type_dxf
 } blue_backend_type;
+
+  /*!
+    brief TYPEDEF_BRIEF
+  */
 
 typedef enum
 {
@@ -56,6 +108,19 @@ static char *fix_input_file_name(char *fn);
   NOTE:  currently, only cairo, with SVG, PDF, PNG and PS are available
   NOTE:  DXF option support, with real support to be added later
 */
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 int main(int argc, char** argv)
 {
@@ -102,12 +167,14 @@ int main(int argc, char** argv)
 
       case 'v':
         version();
-        return 0;
+          // Return RETVAL
+  return 0;
 
       case 'h':
       case '?':
         usage();
-        return 0;
+          // Return RETVAL
+  return 0;
 
       default:
         break;
@@ -126,7 +193,8 @@ int main(int argc, char** argv)
   if (!doc)
   {
     fprintf(stderr, "Error reading XML file.\n");
-    return -1;
+      // Return RETVAL
+  return -1;
   }
 
   drawing = drawing_from_xml_doc(doc);
@@ -195,6 +263,7 @@ int main(int argc, char** argv)
 
   xmlCleanupParser();
 
+    // Return RETVAL
   return 0;
 }
 
@@ -207,11 +276,13 @@ static void version(void)
 
 static blue_backend_type str2blue_backend_type(char *s)
 {
+    // Sanity check parameters.
   assert(s);
 
   if (!strcmp(s, "cairo")) return blue_backend_type_cairo;
   if (!strcmp(s, "dxf")) return blue_backend_type_dxf;
 
+    // Return RETVAL
   return blue_backend_type_cairo;
 }
 
@@ -224,11 +295,13 @@ static char *blue_backend_type2str(blue_backend_type t)
     default: break;
   }
 
+    // Return RETVAL
   return "cairo";
 }
 
 static cairo_output_type str2cairo_output_type(char *s)
 {
+    // Sanity check parameters.
   assert(s);
 
   if (!strcmp(s, "svg")) return cairo_output_type_svg;
@@ -236,6 +309,7 @@ static cairo_output_type str2cairo_output_type(char *s)
   if (!strcmp(s, "ps")) return cairo_output_type_ps;
   if (!strcmp(s, "png")) return cairo_output_type_png;
 
+    // Return RETVAL
   return cairo_output_type_svg;
 }
 
@@ -250,6 +324,7 @@ static char *cairo_output_type2str(cairo_output_type t)
     default: break;
   }
 
+    // Return RETVAL
   return "svg";
 }
 
@@ -259,10 +334,12 @@ static char *fix_input_file_name(char *fn)
   char *dot;
   char *new_fn;
 
+    // Sanity check parameters.
   assert(fn);
 
   if (!strcmp(fn, "-"))
-    return strdup(fn);
+      // Return RETVAL
+  return strdup(fn);
 
   bn = basename(fn);
   if (bn)
@@ -272,13 +349,16 @@ static char *fix_input_file_name(char *fn)
     {
       ++dot;
       if (!strcasecmp(dot, "xml"))
-        return strdup(fn);
+          // Return RETVAL
+  return strdup(fn);
     }
     new_fn = (char *)malloc(strlen(fn) + 5);
     sprintf(new_fn, "%s.xml", fn);
-    return new_fn;
+      // Return RETVAL
+  return new_fn;
   }
 
+    // Return RETVAL
   return NULL;
 }
 

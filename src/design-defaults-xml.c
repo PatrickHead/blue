@@ -1,9 +1,49 @@
+/*!
+    @file design-defaults-xml.c
+
+    @brief SOURCE_BRIEF
+
+    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+
+    @author Patrick Head  mailto:patrickhead@gmail.com
+
+    @copyright Copyright (C) 2014  Patrick Head
+
+    @license
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.@n
+    @n
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.@n
+    @n
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+  /*!
+
+    @file design-defaults-xml.c
+
+    SOURCE_BRIEF
+
+    SOURCE_DETAILS
+
+  */
+
+  // Required system headers
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
+
+  // Project related headers
 
 #include "xml-extensions.h"
 #include "doc-list.h"
@@ -13,11 +53,25 @@
 
 #define MAX_SN 40
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 xmlDocPtr design_defaults_to_xml_doc(design_defaults_s *ds)
 {
   xmlDocPtr doc = NULL;
   xmlNodePtr root = NULL;
 
+    // Sanity check parameters.
   assert(ds);
 
   doc = xmlNewDoc(BAD_CAST "1.0");
@@ -26,8 +80,22 @@ xmlDocPtr design_defaults_to_xml_doc(design_defaults_s *ds)
 
   xmlDocSetRootElement(doc, root);
 
+    // Return RETVAL
   return doc;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 xmlNodePtr design_defaults_to_xml_node(design_defaults_s *ds)
 {
@@ -35,6 +103,7 @@ xmlNodePtr design_defaults_to_xml_node(design_defaults_s *ds)
   xmlNodePtr color_node;
   char sn[MAX_SN];
 
+    // Sanity check parameters.
   assert(ds);
 
   dsn = xmlNewNode(NULL, BAD_CAST "defaults");
@@ -94,31 +163,76 @@ xmlNodePtr design_defaults_to_xml_node(design_defaults_s *ds)
     xmlAddChild(dsn, xmlCopyNode(color_node, 1));
   xmlFreeNode(color_node);
 
+    // Return RETVAL
   return dsn;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 xmlNodePtr design_defaults_root_node(xmlDocPtr doc)
 {
+    // Sanity check parameters.
   assert(doc);
+    // Return RETVAL
   return xmlDocGetRootElement(doc);
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 design_defaults_s *design_defaults_from_xml_doc(xmlDocPtr doc)
 {
   xmlNodePtr root;
 
+    // Sanity check parameters.
   assert(doc);
 
   root = design_defaults_root_node(doc);
 
+    // Return RETVAL
   return design_defaults_from_xml_node(root);
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 design_defaults_s *design_defaults_from_xml_node(xmlNodePtr node)
 {
   xmlNodePtr value;
   design_defaults_s *ds;
 
+    // Sanity check parameters.
   assert(node);
 
   if (strcmp((char*)node->name, "defaults")) return NULL;
@@ -179,8 +293,22 @@ design_defaults_s *design_defaults_from_xml_node(xmlNodePtr node)
     }
   }
 
+    // Return RETVAL
   return ds;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 design_defaults_s *design_defaults_sieve(FILE *infile, FILE *outfile)
 {
@@ -264,6 +392,7 @@ design_defaults_s *design_defaults_sieve(FILE *infile, FILE *outfile)
     }
   }
 
+    // Return RETVAL
   return d;
 }
 

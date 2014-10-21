@@ -1,3 +1,41 @@
+/*!
+    @file render-2d-cairo.c
+
+    @brief SOURCE_BRIEF
+
+    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+
+    @author Patrick Head  mailto:patrickhead@gmail.com
+
+    @copyright Copyright (C) 2014  Patrick Head
+
+    @license
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.@n
+    @n
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.@n
+    @n
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+  /*!
+
+    @file render-2d-cairo.c
+
+    SOURCE_BRIEF
+
+    SOURCE_DETAILS
+
+  */
+
+  // Required system headers
+
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
@@ -6,6 +44,8 @@
 #endif // M_PI
 #include <assert.h>
 #include <pango/pangocairo.h>
+
+  // Project related headers
 
 #include "render-2d-cairo.h"
 
@@ -49,6 +89,19 @@ static void set_y_translation(double y);
 static double get_y_translation(void);
 static void set_text_extents(cairo_text_extents_t tx);
 static cairo_text_extents_t get_text_extents(void);
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 vertex_s *endpoint(vertex_s *pt, double a, double l);
 static void set_design_units(units_t units);
 static units_t get_design_units(void);
@@ -62,13 +115,40 @@ static void close_path(cairo_t *ctx, design_element_s *e);
 static void fill(cairo_t *ctx, design_element_s *e);
 static void fill_lhs(cairo_t *ctx, design_fill_style_s *fs);
 static void fill_image(cairo_t *ctx, design_fill_style_s *fs);
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void pattern_destroy(cairo_pattern_t *pattern);
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 cairo_surface_t *render_2d_cairo(drawing_s *d)
 {
   cairo_surface_t *paper_surface;
   cairo_rectangle_t paper_rect;
 
+    // Sanity check parameters.
   assert(d);
 
   paper_rect = paper_size(d->paper);
@@ -78,6 +158,7 @@ cairo_surface_t *render_2d_cairo(drawing_s *d)
 
   render_paper(paper_surface, d);
 
+    // Return RETVAL
   return paper_surface;
 }
 
@@ -88,6 +169,7 @@ static void render_paper(cairo_surface_t *sur, drawing_s *d)
   double x, y, width, height;
   cairo_surface_t *border_surface;
 
+    // Sanity check parameters.
   assert(sur);
   assert(d);
 
@@ -95,8 +177,47 @@ static void render_paper(cairo_surface_t *sur, drawing_s *d)
   
   cairo_recording_surface_get_extents(sur, &rect);
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_rectangle(ctx, 0.0, 0.0, rect.width, rect.height);
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_set_source_rgb(ctx, 1.0, 1.0, 1.0);
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_fill(ctx);
 
   cairo_destroy(ctx);
@@ -126,15 +247,55 @@ static void render_border(cairo_surface_t *sur, drawing_s *d)
   cairo_surface_t *title_block_surface;
   cairo_surface_t *design_surface;
 
+    // Sanity check parameters.
   assert(sur);
 
   get_surface_size(sur, &rect);
 
   ctx = cairo_create(sur);
   
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_rectangle(ctx, 0.0, 0.0, rect.width, rect.height);
   cairo_set_line_width(ctx, 3.6);
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_set_source_rgb(ctx, 0.85, 0.85, 0.85); // medium grey
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_stroke(ctx);
 
   cairo_destroy(ctx);
@@ -175,6 +336,7 @@ static void render_title_block(cairo_surface_t *sur, drawing_s *d)
   PangoFontDescription *desc;
   char buf[40];
 
+    // Sanity check parameters.
   assert(sur);
 
   ctx = cairo_create(sur);
@@ -183,6 +345,19 @@ static void render_title_block(cairo_surface_t *sur, drawing_s *d)
 
     // Default source settings
   cairo_set_line_width(ctx, 1.8);
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_set_source_rgb(ctx, 0.85, 0.85, 0.85); // medium grey
 
     // Basic Box
@@ -191,22 +366,87 @@ static void render_title_block(cairo_surface_t *sur, drawing_s *d)
   cairo_save(ctx);
   cairo_set_line_width(ctx, 3.6);
   /* free the layout object */
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_rectangle(ctx, 0.0, 0.0, rect.width, rect.height);
   cairo_stroke(ctx);
   cairo_restore(ctx);
 
     // Horizontal Divider
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_move_to(ctx, 0.0, rect.height / 2.0);
   cairo_line_to(ctx, rect.width, rect.height / 2.0);
   cairo_stroke(ctx);
 
     // Vertical Dividers
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_move_to(ctx, rect.width * (5.0/14.0), rect.height);
   cairo_line_to(ctx, rect.width * (5.0/14.0), 0.0);
   cairo_stroke(ctx);
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_move_to(ctx, rect.width * (4.0/7.0), rect.height);
   cairo_line_to(ctx, rect.width * (4.0/7.0), 0.0);
   cairo_stroke(ctx);
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_move_to(ctx, rect.width * (6.0/7.0), rect.height);
   cairo_line_to(ctx, rect.width * (6.0/7.0), 0.0);
   cairo_stroke(ctx);
@@ -285,6 +525,7 @@ static void render_design(cairo_surface_t *sur, drawing_s *d)
   double x_scale;
   double y_scale;
 
+    // Sanity check parameters.
   assert(sur);
   assert(d);
 
@@ -344,8 +585,47 @@ static void render_design(cairo_surface_t *sur, drawing_s *d)
   get_surface_size(bounded, &bounded_ext); // to catch cairo adjustments
 
   ctx = cairo_create(bounded);
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_rectangle(ctx, 0.0, 0.0, bounded_ext.width, bounded_ext.height);
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_set_source_rgb(ctx, 1.0, 1.0, 1.0);
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_fill(ctx);
   cairo_destroy(ctx);
 
@@ -377,6 +657,7 @@ static void render_design_layer(cairo_surface_t *sur, design_layer_s *l)
 {
   design_element_s *element;
 
+    // Sanity check parameters.
   assert(sur);
   assert(l);
 
@@ -424,6 +705,7 @@ static void render_design_element(cairo_surface_t *sur, design_element_s *e)
 static void render_design_element_dimension(cairo_surface_t *sur,
                                             design_element_s *e)
 {
+    // Sanity check parameters.
   assert(sur);
 
   switch (e->type)
@@ -473,6 +755,7 @@ static void render_dimension_linear(cairo_surface_t *sur, design_element_s *e)
   color_s *clr;
   cairo_text_extents_t text_ext;
 
+    // Sanity check parameters.
   assert(sur);
   assert(e);
 
@@ -513,6 +796,19 @@ static void render_dimension_linear(cairo_surface_t *sur, design_element_s *e)
 
   set_line_style(ctx, e->line_style);
   cairo_set_line_width(ctx, design_element_get_line_weight(e));
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_set_source_rgba(ctx, clr->r, clr->g, clr->b, clr->a);
 
   gap = scale(design_linear_get_gap(lin), design_element_get_units(e));
@@ -572,6 +868,19 @@ static void render_dimension_linear(cairo_surface_t *sur, design_element_s *e)
       endpoint(dimline_start, angle, (dimline_length - open_length) / 2.0);
   dimline_u2 =
       endpoint(dimline_u1, angle, open_length);
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 	cairo_set_source_rgba(ctx, clr->r, clr->g, clr->b, clr->a * 0.80);
 
@@ -679,6 +988,7 @@ static void render_dimension_angular(cairo_surface_t *sur, design_element_s *e)
   design_angular_s *ang;
   color_s *clr;
 
+    // Sanity check parameters.
   assert(sur);
   assert(e);
 
@@ -817,6 +1127,19 @@ static void render_dimension_angular(cairo_surface_t *sur, design_element_s *e)
   marker_radius = scale(marker_radius, design_element_get_units(e));
 
   set_line_style(ctx, e->line_style);
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_set_source_rgba(ctx, clr->r, clr->g, clr->b, clr->a * 0.80);
 
     // render extension lines
@@ -836,6 +1159,19 @@ static void render_dimension_angular(cairo_surface_t *sur, design_element_s *e)
                   design_angular_get_alpha(ang)->x,
                   flip_y(sur, design_angular_get_alpha(ang)->y));
   cairo_scale(ctx, 1.0, -1.0);
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 #warning render_dimension_angular(): following line causes cairo extent hiccup
   cairo_arc(ctx, 0.0, 0.0,
             marker_radius,
@@ -903,6 +1239,7 @@ static void render_dimension_radial(cairo_surface_t *sur, design_element_s *e)
   design_radial_s *rad;
   color_s *clr;
 
+    // Sanity check parameters.
   assert(sur);
   assert(e);
 
@@ -1016,6 +1353,19 @@ static void render_dimension_radial(cairo_surface_t *sur, design_element_s *e)
   scale_coords(arrow_tail2, design_element_get_units(e));
 
   set_line_style(ctx, e->line_style);
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_set_source_rgba(ctx, clr->r, clr->g, clr->b, clr->a * 0.80);
 
     // render leader line
@@ -1070,6 +1420,7 @@ static void render_design_element_elliptic(cairo_surface_t *sur,
   design_elliptic_s *ell;
   color_s *clr;
 
+    // Sanity check parameters.
   assert(sur);
   assert(e);
 
@@ -1086,6 +1437,19 @@ static void render_design_element_elliptic(cairo_surface_t *sur,
 
   set_line_style(ctx, e->line_style);
   cairo_set_line_width(ctx, design_element_get_line_weight(e));
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_set_source_rgba(ctx, clr->r, clr->g, clr->b, clr->a);
 
   cairo_save(ctx);
@@ -1118,6 +1482,7 @@ static void render_design_element_line(cairo_surface_t *sur, design_element_s *e
   design_line_s *lin;
   color_s *clr;
 
+    // Sanity check parameters.
   assert(sur);
   assert(e);
 
@@ -1131,6 +1496,19 @@ static void render_design_element_line(cairo_surface_t *sur, design_element_s *e
 
   set_line_style(ctx, e->line_style);
   cairo_set_line_width(ctx, design_element_get_line_weight(e));
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_set_source_rgba(ctx, clr->r, clr->g, clr->b, clr->a);
   start = design_line_get_start(lin);
   translate_coords(start);
@@ -1155,6 +1533,7 @@ static void render_design_element_point(cairo_surface_t *sur,
   design_point_s *pt;
   color_s *clr;
 
+    // Sanity check parameters.
   assert(sur);
   assert(e);
 
@@ -1171,6 +1550,19 @@ static void render_design_element_point(cairo_surface_t *sur,
 
   set_line_style(ctx, e->line_style);
   cairo_set_line_width(ctx, design_element_get_line_weight(e));
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_set_source_rgba(ctx, clr->r, clr->g, clr->b, clr->a);
 
   cairo_arc(ctx, 0.0, 0.0,
@@ -1191,6 +1583,7 @@ static void render_design_element_polyline(cairo_surface_t *sur,
   vertices_s *vertices;
   color_s *clr;
 
+    // Sanity check parameters.
   assert(sur);
   assert(e);
 
@@ -1207,6 +1600,19 @@ static void render_design_element_polyline(cairo_surface_t *sur,
 
   set_line_style(ctx, e->line_style);
   cairo_set_line_width(ctx, design_element_get_line_weight(e));
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_set_source_rgba(ctx, clr->r, clr->g, clr->b, clr->a);
 
   vertex = (vertex_s *)list_head(vertices->vertices);
@@ -1246,6 +1652,7 @@ static void render_design_element_spline(cairo_surface_t *sur,
   vertices_s *vertices;
   color_s *clr;
 
+    // Sanity check parameters.
   assert(sur);
   assert(e);
 
@@ -1262,6 +1669,19 @@ static void render_design_element_spline(cairo_surface_t *sur,
 
   set_line_style(ctx, e->line_style);
   cairo_set_line_width(ctx, design_element_get_line_weight(e));
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_set_source_rgba(ctx, clr->r, clr->g, clr->b, clr->a);
 
   v1 = (vertex_s *)list_head(vertices->vertices);
@@ -1310,6 +1730,7 @@ static void render_design_element_text(cairo_surface_t *sur, design_element_s *e
   design_text_s *txt;
   color_s *clr;
 
+    // Sanity check parameters.
   assert(sur);
   assert(e);
 
@@ -1323,6 +1744,19 @@ static void render_design_element_text(cairo_surface_t *sur, design_element_s *e
 
   cairo_save(ctx);
   set_line_style(ctx, e->line_style);
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_set_source_rgba(ctx, clr->r, clr->g, clr->b, clr->a);
   cairo_select_font_face(ctx,
                          "monospace",
@@ -1412,6 +1846,7 @@ static void render_design_element_tolerance(cairo_surface_t *sur,
   design_tolerance_s *t;
   color_s *clr;
 
+    // Sanity check parameters.
   assert(sur);
   assert(e);
 
@@ -1480,6 +1915,19 @@ static void render_design_element_tolerance(cairo_surface_t *sur,
   scale_coords(box_lower_right, design_element_get_units(e));
 
   set_line_style(ctx, e->line_style);
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_set_source_rgba(ctx, clr->r, clr->g, clr->b, clr->a);
   cairo_set_line_width(ctx, design_element_get_line_weight(e));
 
@@ -1491,6 +1939,19 @@ static void render_design_element_tolerance(cairo_surface_t *sur,
   cairo_close_path(ctx);
   cairo_stroke(ctx);
 /*
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 	cairo_rectangle(ctx,
                   box_upper_left.x,
                   flip_y(sur, box_upper_left.y),
@@ -1534,6 +1995,7 @@ static double convert_to_points(double dim, units_t ut)
 
   result = units_convert(dim, ut, units_type_point);
 
+    // Return RETVAL
   return result;
 }
 
@@ -1542,6 +2004,7 @@ static cairo_rectangle_t paper_size(paper_s *p)
 {
   cairo_rectangle_t rect;
 
+    // Sanity check parameters.
   assert(p);
 
   rect.x = 0.0;
@@ -1550,14 +2013,29 @@ static cairo_rectangle_t paper_size(paper_s *p)
   rect.width = convert_to_points(p->width, p->units);
   rect.height = convert_to_points(p->height, p->units);
 
+    // Return RETVAL
   return rect;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 void get_surface_size(cairo_surface_t *surface, cairo_rectangle_t *rect)
 {
   cairo_t *cr;
   double x1, x2, y1, y2;
 
+    // Sanity check parameters.
   assert(surface);
   assert(rect);
 
@@ -1580,11 +2058,13 @@ static void set_design_scale(double scale)
 
 static double get_design_scale(void)
 {
+    // Return RETVAL
   return _g_scale;
 }
 
 static double scale(double coord, units_t units)
 {
+    // Return RETVAL
   return units_convert(coord, units, get_design_units()) * get_design_scale();
 }
 
@@ -1592,6 +2072,7 @@ static vertex_s *adjust_vertex(vertex_s *v, double a, double d)
 {
   vertex_s *nv;
 
+    // Sanity check parameters.
   assert(v);
 
   nv = vertex_copy(v);
@@ -1599,6 +2080,7 @@ static vertex_s *adjust_vertex(vertex_s *v, double a, double d)
   nv->x -= (d * sin(a));
   nv->y += (d * cos(a));
 
+    // Return RETVAL
   return nv;
 }
 
@@ -1606,6 +2088,7 @@ static double flip_y(cairo_surface_t *sur, double y)
 {
   cairo_rectangle_t sur_size;
 
+    // Sanity check parameters.
   assert(sur);
 
   get_surface_size(sur, &sur_size);
@@ -1613,6 +2096,7 @@ static double flip_y(cairo_surface_t *sur, double y)
   if (sur_size.height != INFINITY)
     y = sur_size.height - y - 1.0;
 
+    // Return RETVAL
   return y;
 }
 
@@ -1626,6 +2110,7 @@ static void set_x_translation(double x)
 
 static double get_x_translation(void)
 {
+    // Return RETVAL
   return _g_x_translation;
 }
 
@@ -1636,11 +2121,13 @@ static void set_y_translation(double y)
 
 static double get_y_translation(void)
 {
+    // Return RETVAL
   return _g_y_translation;
 }
 
 static void translate_coords(vertex_s *v)
 {
+    // Sanity check parameters.
   assert(v);
 
   v->x -= _g_x_translation;
@@ -1649,6 +2136,7 @@ static void translate_coords(vertex_s *v)
 
 static void untranslate_coords(vertex_s *v)
 {
+    // Sanity check parameters.
   assert(v);
 
   v->x += _g_x_translation;
@@ -1657,6 +2145,7 @@ static void untranslate_coords(vertex_s *v)
 
 static void scale_coords(vertex_s *v, units_t units)
 {
+    // Sanity check parameters.
   assert(v);
 
   v->x = scale(v->x, units);
@@ -1672,13 +2161,28 @@ static void set_text_extents(cairo_text_extents_t tx)
 
 static cairo_text_extents_t get_text_extents(void)
 {
+    // Return RETVAL
   return _g_text_extents;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 vertex_s *endpoint(vertex_s *pt, double a, double l)
 {
   vertex_s *nv;
 
+    // Sanity check parameters.
   assert(pt);
 
   nv = vertex_create();
@@ -1686,6 +2190,7 @@ vertex_s *endpoint(vertex_s *pt, double a, double l)
   nv->x = pt->x + (l * cos(a));
   nv->y = pt->y + (l * sin(a));
 
+    // Return RETVAL
   return nv;
 }
 
@@ -1698,6 +2203,7 @@ static void set_design_units(units_t units)
 
 static units_t get_design_units(void)
 {
+    // Return RETVAL
   return _g_design_units;
 }
 
@@ -1711,6 +2217,7 @@ static void set_design_line_styles(design_s *d)
 
 static design_line_styles_s *get_design_line_styles(void)
 {
+    // Return RETVAL
   return _g_design_line_styles;
 }
 
@@ -1724,6 +2231,7 @@ static void set_design_fill_styles(design_s *d)
 
 static design_fill_styles_s *get_design_fill_styles(void)
 {
+    // Return RETVAL
   return _g_design_fill_styles;
 }
 
@@ -1738,6 +2246,7 @@ static void set_line_style(cairo_t *ctx, char *style)
   double *dvals;
   int i;
 
+    // Sanity check parameters.
   assert(ctx);
   if (!style) { unset_line_style(ctx); return; }
 
@@ -1775,6 +2284,7 @@ static void set_line_style(cairo_t *ctx, char *style)
 
 static void unset_line_style(cairo_t *ctx)
 {
+    // Sanity check parameters.
   assert(ctx);
   cairo_set_dash(ctx, NULL, 0, 0.0);
 }
@@ -1832,6 +2342,7 @@ static void fill_lhs(cairo_t *ctx, design_fill_style_s *fs)
   double spacing1;
   double spacing2;
 
+    // Sanity check parameters.
   assert(ctx);
   assert(fs);
 
@@ -1915,6 +2426,7 @@ static void fill_image(cairo_t *ctx, design_fill_style_s *fs)
   cairo_surface_t *surface;
   cairo_pattern_t *pattern;
 
+    // Sanity check parameters.
   assert(ctx);
   assert(fs);
 
@@ -1930,6 +2442,19 @@ static void fill_image(cairo_t *ctx, design_fill_style_s *fs)
 
   pattern_destroy(pattern);
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 void pattern_destroy(cairo_pattern_t *pattern)
 {

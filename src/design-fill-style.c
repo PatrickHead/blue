@@ -1,11 +1,64 @@
+/*!
+    @file design-fill-style.c
+
+    @brief SOURCE_BRIEF
+
+    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+
+    @author Patrick Head  mailto:patrickhead@gmail.com
+
+    @copyright Copyright (C) 2014  Patrick Head
+
+    @license
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.@n
+    @n
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.@n
+    @n
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+  /*!
+
+    @file design-fill-style.c
+
+    SOURCE_BRIEF
+
+    SOURCE_DETAILS
+
+  */
+
+  // Required system headers
+
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+
+  // Project related headers
 
 #include "reference.h"
 
 #include "design-line-style.h"
 #include "design-fill-style.h"
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 design_fill_style_s *design_fill_style_create(void)
 {
@@ -24,17 +77,46 @@ design_fill_style_s *design_fill_style_create(void)
   color_black(fill_style->pattern_color);
   color_set_tag(fill_style->pattern_color, "pattern-color");
 
+    // Return RETVAL
   return fill_style;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void design_fill_style_destroy_void(void *v)
 {
+    // Sanity check parameters.
   assert(v);
   design_fill_style_destroy((design_fill_style_s *)v);
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void design_fill_style_destroy(design_fill_style_s *fs)
 {
+    // Sanity check parameters.
   assert(fs);
   if (fs->name) free(fs->name);
   if (fs->line_style) free(fs->line_style);
@@ -44,10 +126,24 @@ void design_fill_style_destroy(design_fill_style_s *fs)
   free(fs);
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 design_fill_style_s *design_fill_style_copy(design_fill_style_s *fs)
 {
   design_fill_style_s *nfs;
 
+    // Sanity check parameters.
   assert(fs);
 
   nfs = design_fill_style_create();
@@ -62,8 +158,22 @@ design_fill_style_s *design_fill_style_copy(design_fill_style_s *fs)
     nfs->pattern_color = color_copy(fs->pattern_color);
   if (fs->source) nfs->source = strdup(fs->source);
 
+    // Return RETVAL
   return nfs;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 void design_fill_style_set(design_fill_style_s *fs,
                            char *name,
@@ -78,6 +188,7 @@ void design_fill_style_set(design_fill_style_s *fs,
                            double spacing2,
                            char *source)
 {
+    // Sanity check parameters.
   assert(fs);
   assert(name);
   assert(source);
@@ -95,6 +206,19 @@ void design_fill_style_set(design_fill_style_s *fs,
   design_fill_style_set_source(fs, source);
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void design_fill_style_get(design_fill_style_s *fs,
                            char **name,
                            design_fill_style_t *type,
@@ -108,6 +232,7 @@ void design_fill_style_get(design_fill_style_s *fs,
                            double *spacing2,
                            char **source)
 {
+    // Sanity check parameters.
   assert(fs);
   assert(name);
   assert(type);
@@ -134,8 +259,22 @@ void design_fill_style_get(design_fill_style_s *fs,
   *source = design_fill_style_get_source(fs);
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void design_fill_style_set_name(design_fill_style_s *fs, char *name)
 {
+    // Sanity check parameters.
   assert(fs);
   assert(name);
 
@@ -143,29 +282,87 @@ void design_fill_style_set_name(design_fill_style_s *fs, char *name)
   fs->name = strdup(name);
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 char *design_fill_style_get_name(design_fill_style_s *fs)
 {
+    // Sanity check parameters.
   assert(fs);
+    // Return RETVAL
   return fs->name;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 void design_fill_style_set_line_weight(design_fill_style_s *fs,
                                        double line_weight)
 {
+    // Sanity check parameters.
   assert(fs);
 
   fs->line_weight = line_weight;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 double design_fill_style_get_line_weight(design_fill_style_s *fs)
 {
+    // Sanity check parameters.
   assert(fs);
+    // Return RETVAL
   return fs->line_weight;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 void design_fill_style_set_line_style(design_fill_style_s *fs,
                                       char *line_style)
 {
+    // Sanity check parameters.
   assert(fs);
   assert(line_style);
 
@@ -173,15 +370,44 @@ void design_fill_style_set_line_style(design_fill_style_s *fs,
   fs->line_style = strdup(line_style);
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 char *design_fill_style_get_line_style(design_fill_style_s *fs)
 {
+    // Sanity check parameters.
   assert(fs);
+    // Return RETVAL
   return fs->line_style;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 void design_fill_style_set_background_color(design_fill_style_s *fs,
                                             color_s *background_color)
 {
+    // Sanity check parameters.
   assert(fs);
   assert(background_color);
 
@@ -189,15 +415,44 @@ void design_fill_style_set_background_color(design_fill_style_s *fs,
   fs->background_color = color_copy(background_color);
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 color_s *design_fill_style_get_background_color(design_fill_style_s *fs)
 {
+    // Sanity check parameters.
   assert(fs);
+    // Return RETVAL
   return fs->background_color;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 void design_fill_style_set_pattern_color(design_fill_style_s *fs,
                                          color_s *pattern_color)
 {
+    // Sanity check parameters.
   assert(fs);
   assert(pattern_color);
 
@@ -205,75 +460,249 @@ void design_fill_style_set_pattern_color(design_fill_style_s *fs,
   fs->pattern_color = color_copy(pattern_color);
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 color_s *design_fill_style_get_pattern_color(design_fill_style_s *fs)
 {
+    // Sanity check parameters.
   assert(fs);
+    // Return RETVAL
   return fs->pattern_color;
 }
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
 
 void design_fill_style_set_type(design_fill_style_s *fs,
                                 design_fill_style_t type)
 {
+    // Sanity check parameters.
   assert(fs);
   fs->type = type;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 design_fill_style_t design_fill_style_get_type(design_fill_style_s *fs)
 {
+    // Sanity check parameters.
   assert(fs);
+    // Return RETVAL
   return fs->type;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void design_fill_style_set_angle1(design_fill_style_s *fs, double angle)
 {
+    // Sanity check parameters.
   assert(fs);
   fs->angle1 = angle;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 double design_fill_style_get_angle1(design_fill_style_s *fs)
 {
+    // Sanity check parameters.
   assert(fs);
+    // Return RETVAL
   return fs->angle1;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void design_fill_style_set_spacing1(design_fill_style_s *fs, double spacing)
 {
+    // Sanity check parameters.
   assert(fs);
   fs->spacing1 = spacing;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 double design_fill_style_get_spacing1(design_fill_style_s *fs)
 {
+    // Sanity check parameters.
   assert(fs);
+    // Return RETVAL
   return fs->spacing1;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void design_fill_style_set_angle2(design_fill_style_s *fs, double angle)
 {
+    // Sanity check parameters.
   assert(fs);
   fs->angle2 = angle;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 double design_fill_style_get_angle2(design_fill_style_s *fs)
 {
+    // Sanity check parameters.
   assert(fs);
+    // Return RETVAL
   return fs->angle2;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void design_fill_style_set_spacing2(design_fill_style_s *fs, double spacing)
 {
+    // Sanity check parameters.
   assert(fs);
   fs->spacing2 = spacing;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 double design_fill_style_get_spacing2(design_fill_style_s *fs)
 {
+    // Sanity check parameters.
   assert(fs);
+    // Return RETVAL
   return fs->spacing2;
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 void design_fill_style_set_source(design_fill_style_s *fs, char *source)
 {
+    // Sanity check parameters.
   assert(fs);
   assert(source);
 
@@ -281,9 +710,24 @@ void design_fill_style_set_source(design_fill_style_s *fs, char *source)
   fs->source = strdup(source);
 }
 
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
 char *design_fill_style_get_source(design_fill_style_s *fs)
 {
+    // Sanity check parameters.
   assert(fs);
+    // Return RETVAL
   return fs->source;
 }
 
