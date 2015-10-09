@@ -42,6 +42,7 @@ AC_CONFIG_FILES([
   tests/Makefile
   doc/Makefile
   doc/reference-manual/Makefile
+  doc/man-pages/Makefile
   src/libblue.pc
   src/libblue-xml.pc
 ])

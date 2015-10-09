@@ -1,4 +1,4 @@
-EXTRA_DIST = embryo.1.txt
+EXTRA_DIST = embryo.1.txt egg-mapper.1.txt egg.walker.1.txt
 
 docdir = $(datadir)/doc/@PACKAGE@-@VERSION@
 
