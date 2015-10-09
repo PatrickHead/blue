@@ -3,7 +3,7 @@
 
     @brief HEADER_BRIEF
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Tue, 11 Nov 2014 07:22:33 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -40,20 +40,20 @@
 #include "units.h"
 
   /*!
-    brief TYPEDEF_BRIEF
+    @brief TYPEDEF_BRIEF
   */
 
 typedef struct
 {
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief ELEMENT_BRIEF */
   units_t units;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief ELEMENT_BRIEF */
   double left;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief ELEMENT_BRIEF */
   double right;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief ELEMENT_BRIEF */
   double top;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief ELEMENT_BRIEF */
   double bottom;
 } margins_s;
 

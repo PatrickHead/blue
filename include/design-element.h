@@ -1,9 +1,9 @@
 /*!
     @file design-element.h
 
-    @brief HEADER_BRIEF
+    @brief Header file for base design element data structure definition
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Fri, 28 Nov 2014 17:43:51 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -28,19 +28,23 @@
 
     @file design-element.h
 
-    HEADER_BRIEF
+    @brief Header file for base design element data structure definition
 
-    HEADER_DETAILS
+    Structure and maintenance functions for base design element data.
 
   */
 
 #ifndef DESIGN_ELEMENT_H
 #define DESIGN_ELEMENT_H
 
-#include "units.h"
+  // External include files
+
 #include "vertex.h"
 #include "color.h"
 
+  // Project specific include files
+
+#include "units.h"
 #include "design-dimension.h"
 #include "design-elliptic.h"
 #include "design-line.h"
@@ -49,55 +53,57 @@
 #include "design-spline.h"
 #include "design-text.h"
 #include "design-tolerance.h"
-
 #include "design-element-type.h"
 
   /*!
-    brief TYPEDEF_BRIEF
+    @brief Design element structure
   */
 
 typedef struct
 {
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Unique identifier */
   int id;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Type of design element */
   design_element_t type;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Unit of measurement */
   units_t units;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Width of drawn element parts */
   double line_weight;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Style of drawn lines */
   char *line_style;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Style of filled areas of element */
   char *fill_style;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Color of drawn elements */
   color_s *color;
   union
   {
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief dimension element data */
     design_dimension_s *dimension;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief elliptic curve element data */
     design_elliptic_s *elliptic;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief line element data */
     design_line_s *line;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief point element data */
     design_point_s *point;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief polyline (series of connected lines) element data */
     design_polyline_s *polyline;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief spline curve element data */
     design_spline_s *spline;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief descriptive text element data */
     design_text_s *text;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief tolerance annotation element data */
     design_tolerance_s *tolerance;
-    /*! brief ELEMENT_BRIEF */
   };
 } design_element_s;
+
+  // Structure maintenance functions
 
 design_element_s *design_element_create(void);
 void design_element_destroy_void(void *v);
 void design_element_destroy(design_element_s *e);
 design_element_s *design_element_copy(design_element_s *e);
+
+  // Comprehensive getter/setter
 
 void design_element_set(design_element_s *e,
                         int id,
@@ -117,6 +123,8 @@ void design_element_get(design_element_s *e,
                         char **fill_style,
                         color_s **color,
                         void **data);
+
+  // Individual getters/setters
 
 void design_element_set_id(design_element_s *e, int id); 
 int design_element_get_id(design_element_s *e);

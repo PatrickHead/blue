@@ -3,7 +3,7 @@
 
     @brief HEADER_BRIEF
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Tue, 11 Nov 2014 07:22:33 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -42,14 +42,14 @@
 #include "design-line-style-segments.h"
 
   /*!
-    brief TYPEDEF_BRIEF
+    @brief TYPEDEF_BRIEF
   */
 
 typedef struct
 {
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief ELEMENT_BRIEF */
   char *name;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief ELEMENT_BRIEF */
   design_line_style_segments_s *line_style_segments;
 } design_line_style_s;
 

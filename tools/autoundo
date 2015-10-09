@@ -13,3 +13,5 @@ rm -f config.status
 rm -f config.h
 rm -f config.log
 rm -f gray-*.tar.gz
+rm -f libtool
+rm -f stamp-h1

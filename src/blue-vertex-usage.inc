@@ -6,17 +6,17 @@ static void usage(void)
 
   fprintf(stderr,
     "\nUSAGE:\n\n");
-  fprintf(stderr, "    blue-color [--tag=STRING] \\\n");
-  fprintf(stderr, "               [--x=DIMENSION] \\\n");
-  fprintf(stderr, "               [--y=DIMENSION] \\\n");
-  fprintf(stderr, "               [--z=DIMENSION] \\\n");
-  fprintf(stderr, "               [--mode=PROCESS_MODE] \\\n");
-  fprintf(stderr, "               [--input=FILENAME] \\\n");
-  fprintf(stderr, "               [--output=FILENAME]\n");
+  fprintf(stderr, "    blue-vertex [--tag=STRING] \\\n");
+  fprintf(stderr, "                [--x=DIMENSION] \\\n");
+  fprintf(stderr, "                [--y=DIMENSION] \\\n");
+  fprintf(stderr, "                [--z=DIMENSION] \\\n");
+  fprintf(stderr, "                [--mode=PROCESS_MODE] \\\n");
+  fprintf(stderr, "                [--input=FILENAME] \\\n");
+  fprintf(stderr, "                [--output=FILENAME]\n");
   fprintf(stderr, "\n");
-  fprintf(stderr, "    blue-color -v, --version\n");
+  fprintf(stderr, "    blue-vertex -v, --version\n");
   fprintf(stderr, "\n");
-  fprintf(stderr, "    blue-color -h, --help\n");
+  fprintf(stderr, "    blue-vertex -h, --help\n");
   fprintf(stderr, "\n");
   fprintf(stderr, "\nOPTIONS:\n");
   fprintf(stderr, "\n");
@@ -33,24 +33,24 @@ static void usage(void)
 
   fprintf(stderr, "    --tag=STRING\n");
   fprintf(stderr, "\n");
-  fprintf(stderr, "        User defined reference tag for color.\n");
+  fprintf(stderr, "        User defined reference tag for vertex.\n");
   fprintf(stderr, "\n");
 
   fprintf(stderr, "    --x=DIMENSION\n");
   fprintf(stderr, "\n");
-  fprintf(stderr, "        Red value of color.\n");
-  fprintf(stderr, "        Default: 0.0.\n");
-  fprintf(stderr, "\n");
-
-  fprintf(stderr, "    --z=DIMENSION\n");
-  fprintf(stderr, "\n");
-  fprintf(stderr, "        Green value of color.\n");
+  fprintf(stderr, "        X ordinate of vertex.\n");
   fprintf(stderr, "        Default: 0.0.\n");
   fprintf(stderr, "\n");
 
   fprintf(stderr, "    --y=DIMENSION\n");
   fprintf(stderr, "\n");
-  fprintf(stderr, "        Blue value of color.\n");
+  fprintf(stderr, "        Y ordinate of vertex.\n");
+  fprintf(stderr, "        Default: 0.0.\n");
+  fprintf(stderr, "\n");
+
+  fprintf(stderr, "    --z=DIMENSION\n");
+  fprintf(stderr, "\n");
+  fprintf(stderr, "        Z ordinate of vertex.\n");
   fprintf(stderr, "        Default: 0.0.\n");
   fprintf(stderr, "\n");
 

@@ -3,7 +3,7 @@
 
     @brief HEADER_BRIEF
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Tue, 11 Nov 2014 07:22:33 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -38,7 +38,7 @@
 #define DESIGN_RADIAL_TYPE_H
 
   /*!
-    brief TYPEDEF_BRIEF
+    @brief TYPEDEF_BRIEF
   */
 
 typedef enum

@@ -3,7 +3,7 @@
 
     @brief HEADER_BRIEF
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Sun, 28 Dec 2014 01:47:08 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -43,19 +43,20 @@
 #include "design-layers.h"
 
   /*!
-    brief TYPEDEF_BRIEF
+    @brief TYPEDEF_BRIEF
   */
 
 typedef struct
 {
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief ELEMENT_BRIEF */
   design_defaults_s *defaults;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief ELEMENT_BRIEF */
   design_line_styles_s *line_styles;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief ELEMENT_BRIEF */
   design_fill_styles_s *fill_styles;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief ELEMENT_BRIEF */
   design_layers_s *layers;
+  double scaling_factor;
 } design_s;
 
 design_s *design_create(void);
@@ -66,12 +67,14 @@ void design_set(design_s *d,
                 design_defaults_s *defaults,
                 design_line_styles_s *line_styles,
                 design_fill_styles_s *fill_styles,
-                design_layers_s *layers);
+                design_layers_s *layers,
+                double scaling_factor);
 void design_get(design_s *d,
                 design_defaults_s **defaults,
                 design_line_styles_s **line_styles,
                 design_fill_styles_s **fill_styles,
-                design_layers_s **layers);
+                design_layers_s **layers,
+                double *scaling_factor);
 
 void design_set_defaults(design_s *d, design_defaults_s *dflts);
 design_defaults_s *design_get_defaults(design_s *d);
@@ -84,6 +87,9 @@ design_fill_styles_s *design_get_fill_styles(design_s *d);
 
 void design_set_layers(design_s *d, design_layers_s *ls);
 design_layers_s *design_get_layers(design_s *d);
+
+void design_set_scaling_factor(design_s *d, double sf);
+double design_get_scaling_factor(design_s *d);
 
 #endif // DESIGN_H
 

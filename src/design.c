@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Sun, 28 Dec 2014 01:58:29 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -70,6 +70,7 @@ design_s *design_create(void)
   d->line_styles = design_line_styles_create();
   d->fill_styles = design_fill_styles_create();
   d->layers = design_layers_create();
+  d->scaling_factor = 0.0;
 
     // Return RETVAL
   return d;
@@ -150,7 +151,8 @@ void design_set(design_s *d,
                 design_defaults_s *defaults,
                 design_line_styles_s *line_styles,
                 design_fill_styles_s *fill_styles,
-                design_layers_s *layers)
+                design_layers_s *layers,
+                double scaling_factor)
 {
     // Sanity check parameters.
   assert(d);
@@ -163,6 +165,7 @@ void design_set(design_s *d,
   design_set_line_styles(d, line_styles);
   design_set_fill_styles(d, fill_styles);
   design_set_layers(d, layers);
+  design_set_scaling_factor(d, scaling_factor);
 }
 
   /*!
@@ -182,7 +185,8 @@ void design_get(design_s *d,
                 design_defaults_s **defaults,
                 design_line_styles_s **line_styles,
                 design_fill_styles_s **fill_styles,
-                design_layers_s **layers)
+                design_layers_s **layers,
+                double *scaling_factor)
 {
     // Sanity check parameters.
   assert(d);
@@ -195,6 +199,7 @@ void design_get(design_s *d,
   *line_styles = design_get_line_styles(d);
   *fill_styles = design_get_fill_styles(d);
   *layers = design_get_layers(d);
+  *scaling_factor = design_get_scaling_factor(d);
 }
 
   /*!
@@ -371,5 +376,47 @@ design_layers_s *design_get_layers(design_s *d)
   assert(d);
     // Return RETVAL
   return d->layers;
+}
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
+void design_set_scaling_factor(design_s *d, double sf)
+{
+    // Sanity check parameters.
+  assert(d);
+
+  d->scaling_factor = sf;
+}
+
+  /*!
+
+     @brief FUNCTION_BRIEF
+
+     FUNCTION_DETAILS
+
+     @param PARMNAME    PARM_DESCRIPTION
+
+     @retval "RETTYPE" success
+     @retval RETVAL    failure
+
+  */
+
+double design_get_scaling_factor(design_s *d)
+{
+    // Sanity check parameters.
+  assert(d);
+    // Return RETVAL
+  return d->scaling_factor;
 }
 

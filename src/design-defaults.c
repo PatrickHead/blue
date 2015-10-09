@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Sat, 27 Dec 2014 11:33:10 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -113,7 +113,7 @@ design_defaults_s *design_defaults_create(void)
 
   d->units = units_type_mm;
   d->line_weight = 1.0;
-  d->line_style = strdup("NONE");
+  d->line_style = strdup("solid");
   d->fill_style = strdup("NONE");
   d->dimension_text_size = 4.0;
   d->dimension_precision = 2;

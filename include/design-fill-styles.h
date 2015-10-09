@@ -1,9 +1,9 @@
 /*!
     @file design-fill-styles.h
 
-    @brief HEADER_BRIEF
+    @brief Header file for design fill styles list data
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Fri, 28 Nov 2014 18:21:07 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -28,31 +28,41 @@
 
     @file design-fill-styles.h
 
-    HEADER_BRIEF
+    @brief Header file for design fill styles list data
 
-    HEADER_DETAILS
+    Structure and functions for maintaining a list of design fill styles.
 
   */
 
 #ifndef DESIGN_FILL_STYLES_H
 #define DESIGN_FILL_STYLES_H
 
+  // External include files
+
 #include "list.h"
+
+  // Project specific include files
+
 #include "design-fill-style.h"
 
   /*!
-    brief TYPEDEF_BRIEF
+    @brief Design fill style list structure
   */
 
 typedef struct
 {
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief List of design fill styles */
   list_s *fill_styles;
 } design_fill_styles_s;
+
+  // Structure maintenance functions
 
 design_fill_styles_s *design_fill_styles_create(void);
 void design_fill_styles_destroy(design_fill_styles_s *fss);
 design_fill_styles_s *design_fill_styles_copy(design_fill_styles_s *fss);
+
+  // List management functions
+
 void design_fill_styles_add_fill_style(design_fill_styles_s *fss,
                                        design_fill_style_s *fs);
 void design_fill_styles_delete_fill_style(design_fill_styles_s *fss, char *name);

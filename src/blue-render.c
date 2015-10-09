@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Tue, 11 Nov 2014 07:22:33 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -57,7 +57,7 @@
 #define LOCAL_OPTION_BASE 10000
 
   /*!
-    brief TYPEDEF_BRIEF
+    @brief TYPEDEF_BRIEF
   */
 
 typedef enum
@@ -68,7 +68,7 @@ typedef enum
 } blue_option;
 
   /*!
-    brief TYPEDEF_BRIEF
+    @brief TYPEDEF_BRIEF
   */
 
 typedef enum
@@ -78,7 +78,7 @@ typedef enum
 } blue_backend_type;
 
   /*!
-    brief TYPEDEF_BRIEF
+    @brief TYPEDEF_BRIEF
   */
 
 typedef enum

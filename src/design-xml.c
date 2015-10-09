@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Sun, 28 Dec 2014 01:58:54 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -105,6 +105,7 @@ xmlNodePtr design_to_xml_node(design_s *d)
   xmlNodePtr line_styles_node = NULL;
   xmlNodePtr fill_styles_node = NULL;
   xmlNodePtr layers_node = NULL;
+  char sn[MAX_SN];
 
     // Sanity check parameters.
   assert(d);
@@ -140,6 +141,9 @@ xmlNodePtr design_to_xml_node(design_s *d)
     xmlAddChild(node, xmlCopyNode(layers_node, 1));
     xmlFreeNode(layers_node);
   }
+
+  snprintf(sn, MAX_SN, "%f", d->scaling_factor);
+  xmlNewChild(node, NULL, BAD_CAST "scaling-factor", BAD_CAST sn);
 
     // Return RETVAL
   return node;
@@ -244,6 +248,8 @@ design_s *design_from_xml_node(xmlNodePtr node)
           if (d->layers) design_layers_destroy(d->layers);
           d->layers = design_layers_from_xml_node(node);
         }
+        else if (!strcmp((char*)node->name, "scaling-factor"))
+          d->scaling_factor = strtod((char *)value->content, NULL);
       }
     }
   }

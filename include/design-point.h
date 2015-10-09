@@ -3,7 +3,7 @@
 
     @brief HEADER_BRIEF
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Tue, 11 Nov 2014 07:22:33 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -40,12 +40,12 @@
 #include "vertex.h"
 
   /*!
-    brief TYPEDEF_BRIEF
+    @brief TYPEDEF_BRIEF
   */
 
 typedef struct
 {
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief ELEMENT_BRIEF */
   vertex_s *location;
 } design_point_s;
 

@@ -1,9 +1,9 @@
 /*!
     @file blue.h
 
-    @brief HEADER_BRIEF
+    @brief Header file for blue system globals.
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Wed, 12 Nov 2014 14:22:39 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -28,15 +28,17 @@
 
     @file blue.h
 
-    HEADER_BRIEF
+    @brief Header file for blue system globals.
 
-    HEADER_DETAILS
+    This header contains all the global definitions that may apply to and are
+    common to all parts of the libblue api and commands.
 
   */
 
 #ifndef BLUE_H
 #define BLUE_H
 
-#define BLUE_REFERENCE "blue"
+  /*! @brief Used as global external identifier for entire blue system */
+#define BLUE_REFERENCE "net.patrickhead.blue"
 
 #endif // BLUE_H

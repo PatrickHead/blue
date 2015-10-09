@@ -7,6 +7,6 @@ Name: libblue
 Description: Automation library for engineering and mechanical drawing
 URL: patrickhead.net/libblue
 Version: @VERSION@
-Requires: libxml
+Requires: libxml-2.0 libgray
 Libs: -lblue
-Cflags: 
+Cflags: -I@includedir@/blue

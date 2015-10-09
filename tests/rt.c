@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
+#include <cairo.h>
 #include <cairo-svg.h>
 #include <cairo-pdf.h>
 #include <cairo-ps.h>
@@ -21,7 +22,7 @@ int main(int argc, char** argv)
   margins_s *m;
   design_layer_s *ly;
   design_element_s *el;
-  vertex v;
+  vertex_s v;
   cairo_surface_t *r_sur;
   cairo_surface_t *o_sur;
   cairo_t *ctx;
@@ -72,10 +73,10 @@ int main(int argc, char** argv)
   el = design_element_create();
   design_element_set_type(el, design_element_type_line);
   //design_element_set_line_weight(el, 1.5);
-  vertex_set(v, 0, 0, 0);
+  vertex_set(&v, "none", 0, 0, 0);
   design_element_set_start(el, v);
-  vertex_set(v, 10, 10, 0);
-  //vertex_set(v, 1, 1, 0);
+  vertex_set(&v, "none", 10, 10, 0);
+  //vertex_set(&v, "none", 1, 1, 0);
   design_element_set_end(el, v);
   design_layer_add_element(ly, el);
 #endif // line
@@ -93,10 +94,10 @@ int main(int argc, char** argv)
   design_element_set_precision(el, 10);
 */
   //design_element_set_dimension(el, 2);
-  vertex_set(v, 0, 0, 0);
+  vertex_set(&v, "none", 0, 0, 0);
   design_element_set_start(el, v);
-  vertex_set(v, 10, 10, 0);
-  //vertex_set(v, 1, 1, 0);
+  vertex_set(&v, "none", 10, 10, 0);
+  //vertex_set(&v, "none", 1, 1, 0);
   design_element_set_end(el, v);
   design_layer_add_element(ly, el);
 #endif // linear dimension
@@ -110,11 +111,11 @@ int main(int argc, char** argv)
   design_element_set_extension(el, 7.0);
   //design_element_set_text_size(el, 0.1);
   design_element_set_precision(el, 1);
-  vertex_set(v, 0, 0, 0);
+  vertex_set(&v, "none", 0, 0, 0);
   design_element_set_alpha(el, v);
-  vertex_set(v, 10, 10, 0);
+  vertex_set(&v, "none", 10, 10, 0);
   design_element_set_beta(el, v);
-  vertex_set(v, 10, 0, 0);
+  vertex_set(&v, "none", 10, 0, 0);
   design_element_set_gamma(el, v);
   design_layer_add_element(ly, el);
 #endif // angular dimension
@@ -126,7 +127,7 @@ int main(int argc, char** argv)
   design_element_set_dimension_type(el, design_element_dimension_type_radial);
   design_element_set_text_size(el, 0.5);
   design_element_set_precision(el, 1);
-  vertex_set(v, 5, 5, 0);
+  vertex_set(&v, "none", 5, 5, 0);
   design_element_set_center(el, v);
   design_element_set_major(el, 5.0);
   //design_element_set_minor(el, 3.0);
@@ -142,7 +143,7 @@ int main(int argc, char** argv)
   //design_element_set_line_weight(el, 1.0);
   design_element_set_text_size(el, 0.5);
   design_element_set_precision(el, 3);
-  vertex_set(v, 5, 5, 0);
+  vertex_set(&v, "none", 5, 5, 0);
   design_element_set_location(el, v);
   design_element_set_plus(el, 0.003);
   design_element_set_minus(el, 0.003);
@@ -160,11 +161,11 @@ int main(int argc, char** argv)
   design_element_set_text_size(el, 0.1);
   design_element_set_precision(el, 1);
   //design_element_set_angle(el, 30.0);
-  vertex_set(v, 5, 5, 0);
+  vertex_set(&v, "none", 5, 5, 0);
   design_element_set_alpha(el, v);
-  vertex_set(v, 9, 9, 0);
+  vertex_set(&v, "none", 9, 9, 0);
   design_element_set_beta(el, v);
-  vertex_set(v, 9, 1, 0);
+  vertex_set(&v, "none", 9, 1, 0);
   design_element_set_gamma(el, v);
   design_layer_add_element(ly, el);
 // ******* Opens up
@@ -177,11 +178,11 @@ int main(int argc, char** argv)
   design_element_set_text_size(el, 0.1);
   design_element_set_precision(el, 1);
   //design_element_set_angle(el, 30.0);
-  vertex_set(v, 5, 5, 0);
+  vertex_set(&v, "none", 5, 5, 0);
   design_element_set_alpha(el, v);
-  vertex_set(v, 1, 9, 0);
+  vertex_set(&v, "none", 1, 9, 0);
   design_element_set_beta(el, v);
-  vertex_set(v, 9, 9, 0);
+  vertex_set(&v, "none", 9, 9, 0);
   design_element_set_gamma(el, v);
   design_layer_add_element(ly, el);
 */
@@ -197,11 +198,11 @@ int main(int argc, char** argv)
   //design_element_set_precision(el, 2);
   design_element_set_precision(el, 0);
   //design_element_set_angle(el, 30.0);
-  vertex_set(v, 5, 5, 0);
+  vertex_set(&v, "none", 5, 5, 0);
   design_element_set_alpha(el, v);
-  vertex_set(v, 1, 1, 0);
+  vertex_set(&v, "none", 1, 1, 0);
   design_element_set_beta(el, v);
-  vertex_set(v, 1, 9, 0);
+  vertex_set(&v, "none", 1, 9, 0);
   design_element_set_gamma(el, v);
   design_layer_add_element(ly, el);
 // ******* Opens down
@@ -214,11 +215,11 @@ int main(int argc, char** argv)
   design_element_set_text_size(el, 0.1);
   design_element_set_precision(el, 1);
   //design_element_set_angle(el, 30.0);
-  vertex_set(v, 5, 5, 0);
+  vertex_set(&v, "none", 5, 5, 0);
   design_element_set_alpha(el, v);
-  vertex_set(v, 9, 1, 0);
+  vertex_set(&v, "none", 9, 1, 0);
   design_element_set_beta(el, v);
-  vertex_set(v, 1, 1, 0);
+  vertex_set(&v, "none", 1, 1, 0);
   design_element_set_gamma(el, v);
   design_layer_add_element(ly, el);
 */
@@ -226,16 +227,16 @@ int main(int argc, char** argv)
 /*
   el = design_element_create();
   design_element_set_type(el, design_element_type_line);
-  vertex_set(v, 30, 50, 0);
+  vertex_set(&v, "none", 30, 50, 0);
   design_element_set_start(el, v);
-  vertex_set(v, 30, 30, 0);
+  vertex_set(&v, "none", 30, 30, 0);
   design_element_set_end(el, v);
   design_layer_add_element(ly, el);
 
   el = design_element_create();
   design_element_set_type(el, design_element_type_elliptic);
   //design_element_set_line_weight(el, 0.5);
-  vertex_set(v, 50, 50, 0);
+  vertex_set(&v, "none", 50, 50, 0);
   design_element_set_center(el, v);
   design_element_set_width(el, 20);
   design_element_set_height(el, 20);
@@ -257,7 +258,7 @@ int main(int argc, char** argv)
       design_element_set_type(el, design_element_type_text);
       design_element_set_text_type(el, design_text_type_drawing);
       //design_element_set_text_type(el, design_text_type_annotation);
-      vertex_set(v, 50, 30 + (i * 10), 0);
+      vertex_set(&v, "none", 50, 30 + (i * 10), 0);
       design_element_set_location(el, v);
       design_element_set_text_size(el, 3);
       //design_element_set_text_size(el, 1.0/6.0);
@@ -281,7 +282,7 @@ int main(int argc, char** argv)
   r_sur = render_2d_cairo(d);
 
     // Test for XML stuff
-  doc = drawing_to_xml(d);
+  doc = drawing_to_xml_doc(d);
   xmlSaveFormatFileEnc("stuff/test.xml", doc, "UTF-8", 1);
   //xmlSaveFile("stuff/test.xml", doc);
   xmlFreeDoc(doc);

@@ -1,9 +1,9 @@
 /*!
     @file design-fill-style-type.h
 
-    @brief HEADER_BRIEF
+    @brief Header file for design fill style type definitions
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Fri, 28 Nov 2014 18:22:28 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -28,9 +28,9 @@
 
     @file design-fill-style-type.h
 
-    HEADER_BRIEF
+    @brief Header file for design fill style type definitions
 
-    HEADER_DETAILS
+    Defines design fill style types and utility functions.
 
   */
 
@@ -38,7 +38,7 @@
 #define DESIGN_FILL_STYLE_TYPE
 
   /*!
-    brief TYPEDEF_BRIEF
+    @brief Design fill style types
   */
 
 typedef enum
@@ -48,6 +48,8 @@ typedef enum
   design_fill_style_type_stipple,
   design_fill_style_type_source_only
 } design_fill_style_t;
+
+  // Utility functions to convert to/from string
 
 design_fill_style_t str2design_fill_style_type(char* s);
 const char* design_fill_style_type2str(design_fill_style_t t);

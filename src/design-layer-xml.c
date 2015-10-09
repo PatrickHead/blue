@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Sat, 27 Dec 2014 18:43:31 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -236,10 +236,7 @@ design_layer_s *design_layer_from_xml_node(xmlNodePtr node)
           if (l->defaults) design_defaults_destroy(l->defaults);
           l->defaults = design_defaults_from_xml_node(node);
         }
-      }
-      else if (value && (value->type == XML_TEXT_NODE))
-      {
-        if (!strcmp((char*)node->name, "elements"))
+        else if (!strcmp((char*)node->name, "elements"))
         {
           if (l->elements) design_elements_destroy(l->elements);
           l->elements = design_elements_from_xml_node(node);

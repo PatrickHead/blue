@@ -1,9 +1,9 @@
 /*!
     @file design-dimension.h
 
-    @brief HEADER_BRIEF
+    @brief Header file for design dimension element structure
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Fri, 28 Nov 2014 17:48:38 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -28,16 +28,20 @@
 
     @file design-dimension.h
 
-    HEADER_BRIEF
+    @brief Header file for design dimension element structure
 
-    HEADER_DETAILS
+    Structure and maintenance functions for design dimension element.
 
   */
 
 #ifndef DESIGN_DIMENSION_H
 #define DESIGN_DIMENSION_H
 
+  // External include files
+
 #include "vertex.h"
+
+  // Project specific include files
 
 #include "design-dimension-type.h"
 #include "design-linear.h"
@@ -45,34 +49,37 @@
 #include "design-radial.h"
 
   /*!
-    brief TYPEDEF_BRIEF
+    @brief Design dimension structure
   */
 
 typedef struct
 {
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Type of dimension */
   design_dimension_t type;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Size of text rendered in dimension element */
   double text_size;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Location of text */
   vertex_s *text_location;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Precision of dimension */
   int precision;
   union
   {
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Data for linear type dimensions */
     design_linear_s *linear;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Data for angular type dimensions */
     design_angular_s *angular;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Data for radial type dimensions */
     design_radial_s *radial;
-    /*! brief ELEMENT_BRIEF */
   };
 } design_dimension_s;
+
+  // Structure maintenance functions
 
 design_dimension_s *design_dimension_create(void);
 void design_dimension_destroy(design_dimension_s *d);
 design_dimension_s *design_dimension_copy(design_dimension_s *d);
+
+  // Comprehensive getter/setter
 
 void design_dimension_set(design_dimension_s *d,
                           design_dimension_t type,
@@ -87,22 +94,32 @@ void design_dimension_get(design_dimension_s *d,
                           int *precision,
                           void **data);
 
+  // Individual getters/setters
+
 void design_dimension_set_type(design_dimension_s *d,
                                design_dimension_t type); 
 design_dimension_t design_dimension_get_type(design_dimension_s *d);
+
 void design_dimension_set_text_size(design_dimension_s *d, double text_size); 
 double design_dimension_get_text_size(design_dimension_s *d);
+
 void design_dimension_set_text_location(design_dimension_s *d,
                                         vertex_s *text_location); 
 vertex_s *design_dimension_get_text_location(design_dimension_s *d);
+
 void design_dimension_set_precision(design_dimension_s *d, int precision); 
 int design_dimension_get_precision(design_dimension_s *d);
-void design_dimension_set_linear(design_dimension_s *d, design_linear_s *linear); 
+
+void design_dimension_set_linear(design_dimension_s *d,
+                                 design_linear_s *linear); 
 design_linear_s *design_dimension_get_linear(design_dimension_s *d);
+
 void design_dimension_set_angular(design_dimension_s *d,
                                   design_angular_s *angular); 
 design_angular_s *design_dimension_get_angular(design_dimension_s *d);
-void design_dimension_set_radial(design_dimension_s *d, design_radial_s *radial); 
+
+void design_dimension_set_radial(design_dimension_s *d,
+                                 design_radial_s *radial); 
 design_radial_s *design_dimension_get_radial(design_dimension_s *d);
 
 #endif // DESIGN_DIMENSION_H

@@ -1,9 +1,9 @@
 /*!
     @file design-elements.h
 
-    @brief HEADER_BRIEF
+    @brief Header file for design element list data
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Fri, 28 Nov 2014 17:44:11 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -28,34 +28,43 @@
 
     @file design-elements.h
 
-    HEADER_BRIEF
+    @brief Header file for design element list data
 
-    HEADER_DETAILS
+    Structure and functions for maintaining a list of design elements.
 
   */
 
 #ifndef DESIGN_ELEMENTS_H
 #define DESIGN_ELEMENTS_H
 
+  // External include files
+
 #include "list.h"
+
+  // Project specific include files
+
 #include "design-element.h"
 
   /*!
-    brief TYPEDEF_BRIEF
+    @brief Design element list structure
   */
 
 typedef struct
 {
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief list of design elements */
   list_s *elements;
 } design_elements_s;
+
+  // Structure maintenance functions
 
 design_elements_s *design_elements_create(void);
 void design_elements_destroy(design_elements_s *es);
 design_elements_s *design_elements_copy(design_elements_s *es);
+
+  // List management functions
+
 void design_elements_add_element(design_elements_s *es, design_element_s *e);
 void design_elements_delete_element(design_elements_s *es, int id);
 design_element_s *design_elements_get_element_by_id(design_elements_s *ls,
                                                     int id);
-
 #endif // DESIGN_ELEMENTS_H

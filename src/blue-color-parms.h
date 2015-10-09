@@ -3,7 +3,7 @@
 
     @brief HEADER_BRIEF
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Tue, 21 Oct 2014 14:39:36 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 

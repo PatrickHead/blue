@@ -1,9 +1,9 @@
 /*!
     @file design-element-type.h
 
-    @brief HEADER_BRIEF
+    @brief Header file for design element type definition
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Fri, 28 Nov 2014 17:47:34 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -28,9 +28,9 @@
 
     @file design-element-type.h
 
-    HEADER_BRIEF
+    @brief Header file for design element type definition
 
-    HEADER_DETAILS
+    Defines design element types and utility functions.
 
   */
 
@@ -38,7 +38,7 @@
 #define DESIGN_ELEMENT_TYPE_H
 
   /*!
-    brief TYPEDEF_BRIEF
+    @brief Design element types
   */
 
 typedef enum
@@ -54,6 +54,8 @@ typedef enum
   design_element_type_tolerance,
   design_element_type_END
 } design_element_t;
+
+  // Utility functions to convert to/from string
 
 design_element_t str2design_element_type(char* s);
 const char* design_element_type2str(design_element_t t);

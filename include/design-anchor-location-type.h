@@ -1,9 +1,9 @@
 /*!
     @file design-anchor-location-type.h
 
-    @brief HEADER_BRIEF
+    @brief Header file for design anchor location type definition.
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Wed, 12 Nov 2014 14:48:37 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -28,9 +28,11 @@
 
     @file design-anchor-location-type.h
 
-    HEADER_BRIEF
+    @brief Header file for design anchor location type definition.
 
-    HEADER_DETAILS
+    Defines possible anchor location positions, such as "upper left".  These
+    anchor positions are used to offset text position locations, relative to
+    the length and width of the text, and possibly other object types.
 
   */
 
@@ -38,7 +40,7 @@
 #define DESIGN_ANCHOR_LOCATION_TYPE_H
 
   /*!
-    brief TYPEDEF_BRIEF
+    @brief Anchor location types
   */
 
 typedef enum
@@ -49,6 +51,8 @@ typedef enum
   design_anchor_location_type_lower_left,
   design_anchor_location_type_lower_right
 } design_anchor_location_t;
+
+  // Utility functions for converting types to/from strings
 
 design_anchor_location_t str2design_anchor_location_type(char* s);
 const char* design_anchor_location_type2str(design_anchor_location_t t);

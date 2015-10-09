@@ -1,9 +1,9 @@
 /*!
     @file design-defaults.h
 
-    @brief HEADER_BRIEF
+    @brief Header for design defaults structure definition
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Fri, 28 Nov 2014 17:42:23 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -28,68 +28,82 @@
 
     @file design-defaults.h
 
-    HEADER_BRIEF
+    @brief Header for design defaults structure definition
 
-    HEADER_DETAILS
+    Structure and maintenance functions for various defaults for design and
+    layers.
 
   */
 
 #ifndef DESIGN_DEFAULTS_H
 #define DESIGN_DEFAULTS_H
 
-#include "units.h"
+  // External include files
 
 #include "color.h"
 
+  // Project specific include files
+
+#include "units.h"
+
   /*!
-    brief TYPEDEF_BRIEF
+    @brief Design defaults structure
   */
 
 typedef struct
 {
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Unit type */
   units_t units;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Width of lines (in units) */
   double line_weight;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Style of lines */
   char *line_style;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Style of filled areas */
   char *fill_style;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Text size for dimension elements */
   double dimension_text_size;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Precision for dimension elements */
   int dimension_precision;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Gap between measured angle and extension lines */
   double angular_gap;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Length of extension lines */
   double angular_extension;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Gap between end point and extension lines */
   double linear_gap;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Length of extension line from gap to point farthest from end
+               point */
   double linear_extension_above;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Length of extension line from gap to point nearest to end
+               point */
   double linear_extension_below;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Size of text for tolerance elements */
   double tolerance_text_size;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief "Over" for tolerance elements */
   double tolerance_plus;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief "Under" for tolerance elements */
   double tolerance_minus;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Precision of tolerance elements */
   int tolerance_precision;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Background color of various design elements */
   color_s *background_color;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Color of various drawn design elements */
   color_s *element_color;
 } design_defaults_s;
+
+  // Structure maintenance functions
 
 design_defaults_s *design_defaults_create(void);
 void design_defaults_destroy_void(void *v);
 void design_defaults_destroy(design_defaults_s *d);
 design_defaults_s *design_defaults_copy(design_defaults_s *d);
+
+  // Defaults stack functions
+
 void design_defaults_push(design_defaults_s *d);
 design_defaults_s *design_defaults_pop(void);
 design_defaults_s *design_defaults_current(void);
+
+  // Comprehensive getter/setter
 
 void design_defaults_set(design_defaults_s *d,
                          units_t units,
@@ -127,6 +141,8 @@ void design_defaults_get(design_defaults_s *d,
                          int *tolerance_precision,
                          color_s **background_color,
                          color_s **element_color);
+
+  // Individual getters/setters/
 
 void design_defaults_set_units(design_defaults_s *d, units_t units);
 units_t design_defaults_get_units(design_defaults_s *d);

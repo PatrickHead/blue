@@ -8,7 +8,13 @@ latex/refman.tex: $(srcdir)/doxygen.cfg     $(srcdir)/DoxygenLayout.xml 		$(top_
 	@if [ ! -e include ];then ln -s $(top_srcdir)/include include; fi
 	@if [ ! -e src ];then ln -s $(top_srcdir)/src src; fi
 	@if [ ! -e doc ];then ln -s $(top_srcdir)/doc doc; fi
-	@if which doxygen; then doxygen $(srcdir)/doxygen.cfg > /dev/null 2>&1; (cd latex; make > /dev/null 2>&1); fi
+	@if which doxygen; \
+   then \
+     doxygen $(srcdir)/doxygen.cfg > /dev/null 2>&1; \
+     sed -i -e 's/latex_count=8/latex_count=20/' latex/Makefile; \
+     cd latex; \
+     make > /dev/null 2>&1; \
+   fi
 	@if [ -L include ];then rm -f include; fi
 	@if [ -L src ];then rm -f src; fi
 	@if [ -L doc ];then rm -f doc; fi

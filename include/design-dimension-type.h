@@ -1,9 +1,9 @@
 /*!
     @file design-dimension-type.h
 
-    @brief HEADER_BRIEF
+    @brief Header file for design dimension type definitions
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Fri, 28 Nov 2014 17:02:43 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -28,9 +28,9 @@
 
     @file design-dimension-type.h
 
-    HEADER_BRIEF
+    @brief Header file for design dimension type definitions
 
-    HEADER_DETAILS
+    Type definitions for design dimension elements.
 
   */
 
@@ -38,7 +38,7 @@
 #define DESIGN_DIMENSION_TYPE_H
 
   /*!
-    brief TYPEDEF_BRIEF
+    @brief Design dimension types
   */
 
 typedef enum
@@ -49,6 +49,8 @@ typedef enum
   design_dimension_type_radial,
   design_dimension_type_END,
 } design_dimension_t;
+
+  // Utility functions for converting to/from strings
 
 design_dimension_t str2design_dimension_type(char* s);
 const char* design_dimension_type2str(design_dimension_t t);

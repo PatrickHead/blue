@@ -1,5 +1,9 @@
-EXTRA_DIST = blue-border-usage.inc blue-color-usage.inc blue-design-angular-usage.inc blue-design-defaults-usage.inc blue-design-dimension-usage.inc blue-design-elements-usage.inc blue-design-element-usage.inc blue-design-elliptic-usage.inc blue-design-fill-styles-usage.inc blue-design-fill-style-usage.inc blue-design-layers-usage.inc blue-design-layer-usage.inc blue-design-linear-usage.inc blue-design-line-style-segments-usage.inc blue-design-line-style-segment-usage.inc blue-design-line-styles-usage.inc blue-design-line-style-usage.inc blue-design-line-usage.inc blue-design-point-usage.inc blue-design-polyline-usage.inc blue-design-radial-usage.inc blue-design-spline-usage.inc blue-design-text-usage.inc blue-design-tolerance-usage.inc blue-design-usage.inc blue-drawing-usage.inc blue-margins-usage.inc blue-paper-usage.inc blue-render-usage.inc blue-title-block-usage.inc blue-vertex-usage.inc blue-vertices-usage.inc
+EXTRA_DIST = blue-border-usage.inc blue-color-usage.inc blue-design-angular-usage.inc blue-design-defaults-usage.inc blue-design-dimension-usage.inc blue-design-elements-usage.inc blue-design-element-usage.inc blue-design-elliptic-usage.inc blue-design-fill-styles-usage.inc blue-design-fill-style-usage.inc blue-design-layers-usage.inc blue-design-layer-usage.inc blue-design-linear-usage.inc blue-design-line-style-segments-usage.inc blue-design-line-style-segment-usage.inc blue-design-line-styles-usage.inc blue-design-line-style-usage.inc blue-design-line-usage.inc blue-design-point-usage.inc blue-design-polyline-usage.inc blue-design-radial-usage.inc blue-design-spline-usage.inc blue-design-text-usage.inc blue-design-tolerance-usage.inc blue-design-usage.inc blue-drawing-usage.inc blue-margins-usage.inc blue-paper-usage.inc blue-render-usage.inc blue-title-block-usage.inc blue-vertex-usage.inc blue-vertices-usage.inc libblue.pc.in libblue-xml.pc.in
 
+pkgconfiglibdir = $(libdir)/pkgconfig
+pkgconfiglib_DATA = libblue.pc libblue-xml.pc
+
+#AM_CFLAGS = -std=c99 -O3 -I .. -I $(top_srcdir)/include
 AM_CFLAGS = -O3 -I .. -I $(top_srcdir)/include
 AM_LDFLAGS =
 

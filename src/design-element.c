@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Sat, 27 Dec 2014 11:25:01 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -45,6 +45,7 @@
 #include "reference.h"
 
 #include "blue.h"
+#include "design-defaults.h"
 
 #include "design-element.h"
 
@@ -64,6 +65,7 @@
 design_element_s *design_element_create(void)
 {
   design_element_s *element;
+  design_defaults_s *d;
 
   element = (design_element_s *)malloc(sizeof(design_element_s));
   memset(element, 0, sizeof(design_element_s));
@@ -77,6 +79,16 @@ design_element_s *design_element_create(void)
   element->color = color_create();
   color_none(element->color);
   color_set_tag(element->color, "color");
+
+  d = design_defaults_current();
+  if (d)
+  {
+    design_element_set_units(element, d->units);
+    design_element_set_line_weight(element, d->line_weight);
+    design_element_set_line_style(element, d->line_style);
+    design_element_set_fill_style(element, d->fill_style);
+    design_element_set_color(element, d->element_color);
+  }
 
   design_element_set_type(element, design_element_type_point);
 

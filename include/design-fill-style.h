@@ -1,9 +1,9 @@
 /*!
     @file design-fill-style.h
 
-    @brief HEADER_BRIEF
+    @brief Header file for design fill style structure
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Fri, 28 Nov 2014 18:00:28 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -28,53 +28,61 @@
 
     @file design-fill-style.h
 
-    HEADER_BRIEF
+    @brief Header file for design fill style structure
 
-    HEADER_DETAILS
+    Structure and maintenance functions for design fill style.
 
   */
 
 #ifndef DESIGN_FILL_STYLE_H
 #define DESIGN_FILL_STYLE_H
 
+  // External include files
+
 #include "color.h"
+
+  // Project specific include files
 
 #include "design-fill-style-type.h"
 
   /*!
-    brief TYPEDEF_BRIEF
+    @brief Design fill style structure
   */
 
 typedef struct
 {
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Unique name of fill style */
   char *name;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Fill style type */
   design_fill_style_t type;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Width of drawn lines in fill style, if any */
   double line_weight;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Style of drawn lines in fill style, if any */
   char *line_style;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Background color of filled area */
   color_s *background_color;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Color of drawn lines in fill style, if any */
   color_s *pattern_color;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Angle from vertical of first set of lines, if any */
   double angle1;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Line spacing of first set of lines, if any */
   double spacing1;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Angle from vertical of second set of lines, if any */
   double angle2;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Line spacing of second set of lines, if any */
   double spacing2;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief ELEMENT_BRIEF */
   char *source;
 } design_fill_style_s;
+
+  // Structure maintenance functions
 
 design_fill_style_s *design_fill_style_create(void);
 void design_fill_style_destroy_void(void *v);
 void design_fill_style_destroy(design_fill_style_s *fs);
 design_fill_style_s *design_fill_style_copy(design_fill_style_s *fs);
+
+  // Comprehensive getter/setter
 
 void design_fill_style_set(design_fill_style_s *fs,
                            char *name,
@@ -100,6 +108,8 @@ void design_fill_style_get(design_fill_style_s *fs,
                            double *angle2,
                            double *spacing2,
                            char **source);
+
+  // Individual getters/setters
 
 void design_fill_style_set_name(design_fill_style_s *fs, char *name);
 char *design_fill_style_get_name(design_fill_style_s *fs);

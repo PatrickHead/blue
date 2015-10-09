@@ -1,9 +1,9 @@
 /*!
     @file design-elliptic.h
 
-    @brief HEADER_BRIEF
+    @brief Header file for design elliptic element structure
 
-    @timestamp Mon, 06 Jan 2014 15:17:36 +0000
+    @timestamp Fri, 28 Nov 2014 17:52:12 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -28,40 +28,46 @@
 
     @file design-elliptic.h
 
-    HEADER_BRIEF
+    @brief Header file for design elliptic element structure
 
-    HEADER_DETAILS
+    Structure and maintenance functions for design elliptic element.
 
   */
 
 #ifndef DESIGN_ELLIPTIC_H
 #define DESIGN_ELLIPTIC_H
 
+  // External include files
+
 #include "vertex.h"
 
   /*!
-    brief TYPEDEF_BRIEF
+    @brief Design elliptic element structure
   */
 
 typedef struct
 {
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Center point of elliptic curve */
   vertex_s *center;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Width of elliptic curve */
   double width;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Height of elliptic curve */
   double height;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Rotation of elliptic curve, in degrees */
   double rotation;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Starting point of drawn elliptic curve, in degrees */
   double start_angle;
-    /*! brief ELEMENT_BRIEF */
+    /*! @brief Ending point of drawn elliptic curve, in degrees */
   double end_angle;
 } design_elliptic_s;
+
+  // Structure maintenance functions
 
 design_elliptic_s *design_elliptic_create(void);
 void design_elliptic_destroy(design_elliptic_s *e);
 design_elliptic_s *design_elliptic_copy(design_elliptic_s *e);
+
+  // Comprehensive getter/setter
 
 void design_elliptic_set(design_elliptic_s *e,
                          vertex_s *center,
@@ -77,6 +83,8 @@ void design_elliptic_get(design_elliptic_s *e,
                          double *rotation,
                          double *start_angle,
                          double *end_angle);
+
+  // Individual getters/setters
 
 void design_elliptic_set_center(design_elliptic_s *e, vertex_s *center); 
 vertex_s *design_elliptic_get_center(design_elliptic_s *e);
