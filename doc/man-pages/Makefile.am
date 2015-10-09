@@ -1,4 +1,4 @@
-EXTRA_DIST = embryo.1.txt egg-mapper.1.txt egg.walker.1.txt
+EXTRA_DIST = embryo.1.txt
 
 docdir = $(datadir)/doc/@PACKAGE@-@VERSION@
 
@@ -38,12 +38,13 @@ egg-mapper.1: egg-mapper.1.gz egg-mapper.1.pdf egg-mapper.1.html
 
 egg-walker.1: egg-walker.1.gz egg-walker.1.pdf egg-walker.1.html
 
-all: embryo.1 egg-mapper.1 egg-walker.1 all-am
+all: embryo.1 all-am
 
 clean-local:
 	-rm -f *.1.gz
 	-rm -f *.1.pdf
 	-rm -f *.1.html
+	-rm -f *.1.xml
 	-rm -f *.css
 
 install-data-local: install-man-local install-pdf-local install-html-local
