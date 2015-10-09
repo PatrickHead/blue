@@ -3,7 +3,7 @@
 
     @brief Header file for design anchor location type definition.
 
-    @timestamp Wed, 12 Nov 2014 14:48:37 +0000
+    @timestamp Fri, 09 Oct 2015 03:31:15 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 

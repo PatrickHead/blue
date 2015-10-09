@@ -3,7 +3,7 @@
 
     @brief Header file for design fill style type definitions
 
-    @timestamp Fri, 28 Nov 2014 18:22:28 +0000
+    @timestamp Fri, 09 Oct 2015 03:31:15 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 

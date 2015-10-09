@@ -3,7 +3,7 @@
 
     @brief Header file for blue system globals.
 
-    @timestamp Wed, 12 Nov 2014 14:22:39 +0000
+    @timestamp Fri, 09 Oct 2015 03:31:15 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 

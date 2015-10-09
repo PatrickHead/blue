@@ -3,7 +3,7 @@
 
     @brief Header file for paper border data
 
-    @timestamp Fri, 28 Nov 2014 17:41:13 +0000
+    @timestamp Fri, 09 Oct 2015 03:31:15 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
