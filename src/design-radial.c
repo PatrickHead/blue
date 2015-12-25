@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Fri, 09 Oct 2015 03:31:15 +0000
+    @timestamp Sun, 20 Dec 2015 12:30:18 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -253,7 +253,7 @@ void design_radial_set_center(design_radial_s *r, vertex_s *center)
     // Sanity check parameters.
   assert(r);
   if (r->center) vertex_destroy(r->center);
-  r->center = center;
+  r->center = vertex_copy(center);
   vertex_set_tag(r->center, "center");
 }
 

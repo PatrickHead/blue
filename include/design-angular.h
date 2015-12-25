@@ -3,7 +3,7 @@
 
     @brief Header file for design angular type definition.
 
-    @timestamp Fri, 09 Oct 2015 03:31:15 +0000
+    @timestamp Fri, 09 Oct 2015 05:38:21 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 

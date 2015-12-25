@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Fri, 09 Oct 2015 03:31:15 +0000
+    @timestamp Sun, 20 Dec 2015 12:19:59 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -217,7 +217,7 @@ design_layer_s *design_layers_get_layer_by_id(design_layers_s *ls, int id)
   {
     if (l->id == id)
         // Return RETVAL
-  return l;
+      return l;
   }
 
     // Return RETVAL
@@ -251,7 +251,7 @@ design_layer_s *design_layers_get_layer_by_name(design_layers_s *ls, char *name)
   {
     if (!strcmp(l->name, name))
         // Return RETVAL
-  return l;
+      return l;
   }
 
     // Return RETVAL

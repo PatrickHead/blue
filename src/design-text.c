@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Fri, 09 Oct 2015 03:31:15 +0000
+    @timestamp Sun, 20 Dec 2015 12:32:10 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -256,7 +256,7 @@ void design_text_set_location(design_text_s *t, vertex_s *location)
   assert(t);
   assert(location);
   if (t->location) vertex_destroy(t->location);
-  t->location = location;
+  t->location = vertex_copy(location);
   vertex_set_tag(t->location, "location");
 }
 

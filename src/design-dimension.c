@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Fri, 09 Oct 2015 03:31:15 +0000
+    @timestamp Sun, 20 Dec 2015 12:11:57 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -47,6 +47,8 @@
 #include "design-defaults.h"
 
 #include "design-dimension.h"
+
+static void destroy_type(design_dimension_s *d);
 
   /*!
 
@@ -96,19 +98,7 @@ void design_dimension_destroy(design_dimension_s *d)
     // Sanity check parameters.
   assert(d);
   if (d->text_location) vertex_destroy(d->text_location);
-  switch (d->type)
-  {
-    case design_dimension_type_angular:
-      design_angular_destroy(d->angular);
-      break;
-    case design_dimension_type_linear:
-      design_linear_destroy(d->linear);
-      break;
-    case design_dimension_type_radial:
-      design_radial_destroy(d->radial);
-      break;
-    default: break;
-  }
+  destroy_type(d);
   free(d);
 }
 
@@ -268,19 +258,7 @@ void design_dimension_set_type(design_dimension_s *d, design_dimension_t type)
 
   dfs = design_defaults_current();
 
-  switch (d->type)
-  {
-    case design_dimension_type_angular:
-      if (d->angular) design_angular_destroy(d->angular);
-      break;
-    case design_dimension_type_linear:
-      if (d->linear) design_linear_destroy(d->linear);
-      break;
-    case design_dimension_type_radial:
-      if (d->radial) design_radial_destroy(d->radial);
-      break;
-    default: break;
-  }
+  destroy_type(d);
 
   d->type = type;
 
@@ -474,8 +452,7 @@ void design_dimension_set_angular(design_dimension_s *d,
   assert(angular);
 
   design_dimension_set_type(d, design_dimension_type_angular);
-  design_angular_destroy(d->angular);
-  d->angular = angular;
+  d->angular = design_angular_copy(angular);
 }
  
   /*!
@@ -519,8 +496,7 @@ void design_dimension_set_linear(design_dimension_s *d, design_linear_s *linear)
   assert(linear);
 
   design_dimension_set_type(d, design_dimension_type_linear);
-  design_linear_destroy(d->linear);
-  d->linear = linear;
+  d->linear = design_linear_copy(linear);
 }
  
   /*!
@@ -564,8 +540,7 @@ void design_dimension_set_radial(design_dimension_s *d, design_radial_s *radial)
   assert(radial);
 
   design_dimension_set_type(d, design_dimension_type_radial);
-  design_radial_destroy(d->radial);
-  d->radial = radial;
+  d->radial = design_radial_copy(radial);
 }
  
   /*!
@@ -587,5 +562,28 @@ design_radial_s *design_dimension_get_radial(design_dimension_s *d)
   assert(d);
     // Return RETVAL
   return d->radial;
+}
+
+static void destroy_type(design_dimension_s *d)
+{
+  assert(d);
+
+  switch (d->type)
+  {
+    case design_dimension_type_angular:
+      if (d->angular) design_angular_destroy(d->angular);
+      break;
+    case design_dimension_type_linear:
+      if (d->linear) design_linear_destroy(d->linear);
+      break;
+    case design_dimension_type_radial:
+      if (d->radial) design_radial_destroy(d->radial);
+      break;
+    default: break;
+  }
+
+  d->linear = NULL;
+
+  return;
 }
 

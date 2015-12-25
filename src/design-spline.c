@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Fri, 09 Oct 2015 03:31:15 +0000
+    @timestamp Sun, 20 Dec 2015 12:31:00 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -185,7 +185,7 @@ void design_spline_set_vertices(design_spline_s *s, vertices_s *vertices)
   assert(s);
   assert(vertices);
   if (s->vertices) vertices_destroy(s->vertices);
-  s->vertices = vertices;
+  s->vertices = vertices_copy(vertices);
 }
 
   /*!

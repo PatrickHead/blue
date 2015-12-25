@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Fri, 09 Oct 2015 03:31:15 +0000
+    @timestamp Sun, 20 Dec 2015 02:38:34 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -48,6 +48,8 @@
 #include "design-defaults.h"
 
 #include "design-element.h"
+
+static void destroy_type(design_element_s *e);
 
   /*!
 
@@ -137,34 +139,8 @@ void design_element_destroy(design_element_s *e)
 
   if (e->color) color_destroy(e->color);
 
-  switch (e->type)
-  {
-    case design_element_type_dimension:
-      if (e->dimension) design_dimension_destroy(e->dimension);
-      break;
-    case design_element_type_elliptic:
-      if (e->elliptic) design_elliptic_destroy(e->elliptic);
-      break;
-    case design_element_type_line:
-      if (e->line) design_line_destroy(e->line);
-      break;
-    case design_element_type_point:
-      if (e->point) design_point_destroy(e->point);
-      break;
-    case design_element_type_polyline:
-      if (e->polyline) design_polyline_destroy(e->polyline);
-      break;
-    case design_element_type_spline:
-      if (e->spline) design_spline_destroy(e->spline);
-      break;
-    case design_element_type_text:
-      if (e->text) design_text_destroy(e->text);
-      break;
-    case design_element_type_tolerance:
-      if (e->tolerance) design_tolerance_destroy(e->tolerance);
-      break;
-    default: break;
-  }
+  destroy_type(e);
+
   free(e);
 }
 
@@ -423,34 +399,7 @@ void design_element_set_type(design_element_s *e, design_element_t type)
     // Sanity check parameters.
   assert(e);
 
-  switch (e->type)
-  {
-    case design_element_type_dimension:
-      if (e->dimension) design_dimension_destroy(e->dimension);
-      break;
-    case design_element_type_elliptic:
-      if (e->elliptic) design_elliptic_destroy(e->elliptic);
-      break;
-    case design_element_type_line:
-      if (e->line) design_line_destroy(e->line);
-      break;
-    case design_element_type_point:
-      if (e->point) design_point_destroy(e->point);
-      break;
-    case design_element_type_polyline:
-      if (e->polyline) design_polyline_destroy(e->polyline);
-      break;
-    case design_element_type_spline:
-      if (e->spline) design_spline_destroy(e->spline);
-      break;
-    case design_element_type_text:
-      if (e->text) design_text_destroy(e->text);
-      break;
-    case design_element_type_tolerance:
-      if (e->tolerance) design_tolerance_destroy(e->tolerance);
-      break;
-    default: break;
-  }
+  destroy_type(e);
 
   e->type = type;
 
@@ -733,8 +682,7 @@ void design_element_set_dimension(design_element_s *e, design_dimension_s *d)
   assert(d);
 
   design_element_set_type(e, design_element_type_dimension);
-  design_dimension_destroy(e->dimension);
-  e->dimension = d;
+  e->dimension = design_dimension_copy(d);
 }
 
   /*!
@@ -778,8 +726,7 @@ void design_element_set_elliptic(design_element_s *e, design_elliptic_s *el)
   assert(el);
 
   design_element_set_type(e, design_element_type_elliptic);
-  design_elliptic_destroy(e->elliptic);
-  e->elliptic = el;
+  e->elliptic = design_elliptic_copy(el);
 }
 
   /*!
@@ -823,8 +770,7 @@ void design_element_set_line(design_element_s *e, design_line_s *l)
   assert(l);
 
   design_element_set_type(e, design_element_type_line);
-  design_line_destroy(e->line);
-  e->line = l;
+  e->line = design_line_copy(l);
 }
 
   /*!
@@ -868,8 +814,7 @@ void design_element_set_point(design_element_s *e, design_point_s *p)
   assert(p);
 
   design_element_set_type(e, design_element_type_point);
-  design_point_destroy(e->point);
-  e->point = p;
+  e->point = design_point_copy(p);
 }
 
   /*!
@@ -913,8 +858,7 @@ void design_element_set_polyline(design_element_s *e, design_polyline_s *pl)
   assert(pl);
 
   design_element_set_type(e, design_element_type_polyline);
-  design_polyline_destroy(e->polyline);
-  e->polyline = pl;
+  e->polyline = design_polyline_copy(pl);
 }
 
   /*!
@@ -958,8 +902,7 @@ void design_element_set_spline(design_element_s *e, design_spline_s *s)
   assert(s);
 
   design_element_set_type(e, design_element_type_spline);
-  design_spline_destroy(e->spline);
-  e->spline = s;
+  e->spline = design_spline_copy(s);
 }
 
   /*!
@@ -1003,8 +946,7 @@ void design_element_set_text(design_element_s *e, design_text_s *t)
   assert(t);
 
   design_element_set_type(e, design_element_type_text);
-  design_text_destroy(e->text);
-  e->text = t;
+  e->text = design_text_copy(t);
 }
 
   /*!
@@ -1048,8 +990,7 @@ void design_element_set_tolerance(design_element_s *e, design_tolerance_s *t)
   assert(t);
 
   design_element_set_type(e, design_element_type_tolerance);
-  design_tolerance_destroy(e->tolerance);
-  e->tolerance = t;
+  e->tolerance = design_tolerance_copy(t);
 }
 
   /*!
@@ -1071,5 +1012,43 @@ design_tolerance_s *design_element_get_tolerance(design_element_s *e)
   assert(e);
     // Return RETVAL
   return e->tolerance;
+}
+
+static void destroy_type(design_element_s *e)
+{
+  assert(e);
+
+  switch (e->type)
+  {
+    case design_element_type_dimension:
+      if (e->dimension) design_dimension_destroy(e->dimension);
+      break;
+    case design_element_type_elliptic:
+      if (e->elliptic) design_elliptic_destroy(e->elliptic);
+      break;
+    case design_element_type_line:
+      if (e->line) design_line_destroy(e->line);
+      break;
+    case design_element_type_point:
+      if (e->point) design_point_destroy(e->point);
+      break;
+    case design_element_type_polyline:
+      if (e->polyline) design_polyline_destroy(e->polyline);
+      break;
+    case design_element_type_spline:
+      if (e->spline) design_spline_destroy(e->spline);
+      break;
+    case design_element_type_text:
+      if (e->text) design_text_destroy(e->text);
+      break;
+    case design_element_type_tolerance:
+      if (e->tolerance) design_tolerance_destroy(e->tolerance);
+      break;
+    default: break;
+  }
+
+  e->point = NULL;
+
+  return;
 }
 

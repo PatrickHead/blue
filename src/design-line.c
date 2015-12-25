@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Fri, 09 Oct 2015 03:31:15 +0000
+    @timestamp Sun, 20 Dec 2015 12:22:47 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -199,7 +199,7 @@ void design_line_set_start(design_line_s *l, vertex_s *start)
   assert(l);
   assert(start);
   if (l->start) vertex_destroy(l->start);
-  l->start = start;
+  l->start = vertex_copy(start);
   vertex_set_tag(l->start, "start");
 }
 
@@ -243,7 +243,7 @@ void design_line_set_end(design_line_s *l, vertex_s *end)
   assert(l);
   assert(end);
   if (l->end) vertex_destroy(l->end);
-  l->end = end;
+  l->end = vertex_copy(end);
   vertex_set_tag(l->end, "end");
 }
 

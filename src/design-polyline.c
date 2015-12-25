@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Fri, 09 Oct 2015 03:31:15 +0000
+    @timestamp Sun, 20 Dec 2015 12:29:11 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -185,7 +185,7 @@ void design_polyline_set_vertices(design_polyline_s *pl, vertices_s *vertices)
   assert(pl);
   assert(vertices);
   if (pl->vertices) vertices_destroy(pl->vertices);
-  pl->vertices = vertices;
+  pl->vertices = vertices_copy(vertices);
 }
 
   /*!

@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Fri, 09 Oct 2015 03:31:15 +0000
+    @timestamp Sun, 20 Dec 2015 03:12:46 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -1055,7 +1055,7 @@ void design_defaults_set_background_color(design_defaults_s *d, color_s *color)
   assert(d);
   assert(color);
   if (d->background_color) color_destroy(d->background_color);
-  d->background_color = color;
+  d->background_color = color_copy(color);
   color_set_tag(d->background_color, "background-color");
 }
 
@@ -1099,7 +1099,7 @@ void design_defaults_set_element_color(design_defaults_s *d, color_s *color)
   assert(d);
   assert(color);
   if (d->element_color) color_destroy(d->element_color);
-  d->element_color = color;
+  d->element_color = color_copy(color);
   color_set_tag(d->element_color, "element-color");
 }
 

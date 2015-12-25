@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Fri, 09 Oct 2015 03:31:15 +0000
+    @timestamp Sun, 20 Dec 2015 12:14:38 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -213,7 +213,7 @@ void design_elliptic_set_center(design_elliptic_s *e, vertex_s *center)
   assert(e);
   assert(center);
   if (e->center) vertex_destroy(e->center);
-  e->center = center;
+  e->center = vertex_copy(center);
   vertex_set_tag(e->center, "center");
 }
 

@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Fri, 09 Oct 2015 03:31:15 +0000
+    @timestamp Sun, 20 Dec 2015 03:08:30 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -276,7 +276,7 @@ void design_angular_set_alpha(design_angular_s *a, vertex_s *alpha)
   assert(a);
   assert(alpha);
   if (a->alpha) vertex_destroy(a->alpha);
-  a->alpha = alpha;
+  a->alpha = vertex_copy(alpha);
   vertex_set_tag(a->alpha, "alpha");
 }
 
@@ -320,7 +320,7 @@ void design_angular_set_beta(design_angular_s *a, vertex_s *beta)
   assert(a);
   assert(beta);
   if (a->beta) vertex_destroy(a->beta);
-  a->beta = beta;
+  a->beta = vertex_copy(beta);
   vertex_set_tag(a->beta, "beta");
 }
 
@@ -364,7 +364,7 @@ void design_angular_set_gamma(design_angular_s *a, vertex_s *gamma)
   assert(a);
   assert(gamma);
   if (a->gamma) vertex_destroy(a->gamma);
-  a->gamma = gamma;
+  a->gamma = vertex_copy(gamma);
   vertex_set_tag(a->gamma, "gamma");
 }
 

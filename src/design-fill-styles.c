@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Fri, 09 Oct 2015 03:31:15 +0000
+    @timestamp Sun, 20 Dec 2015 12:17:24 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -219,7 +219,7 @@ design_fill_style_s *design_fill_styles_get_fill_style(design_fill_styles_s *fss
   {
     if (!strcmp(fs->name, name))
         // Return RETVAL
-  return fs;
+      return fs;
   }
 
     // Return RETVAL
