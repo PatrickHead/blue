@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Fri, 09 Oct 2015 05:38:21 +0000
+    @timestamp Sun, 27 Dec 2015 08:16:48 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -353,7 +353,7 @@ void border_set_background_color(border_s *b, color_s *background_color)
   assert(b);
   assert(background_color);
   if (b->background_color) color_destroy(b->background_color);
-  b->background_color = background_color;
+  b->background_color = color_copy(background_color);
   color_set_tag(b->background_color, "background-color");
 }
 
@@ -397,7 +397,7 @@ void border_set_line_color(border_s *b, color_s *line_color)
   assert(b);
   assert(line_color);
   if (b->line_color) color_destroy(b->line_color);
-  b->line_color = line_color;
+  b->line_color = color_copy(line_color);
   color_set_tag(b->line_color, "line-color");
 }
 

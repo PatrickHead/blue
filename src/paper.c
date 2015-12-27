@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Fri, 09 Oct 2015 05:38:21 +0000
+    @timestamp Sun, 27 Dec 2015 08:20:57 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -515,7 +515,7 @@ void paper_set_color(paper_s *p, color_s *color)
   assert(p);
   assert(color);
   if (p->color) color_destroy(p->color);
-  p->color = color;
+  p->color = color_copy(color);
   color_set_tag(p->color, "color");
 }
 

@@ -3,7 +3,7 @@
 
     @brief SOURCE_BRIEF
 
-    @timestamp Sun, 20 Dec 2015 02:38:34 +0000
+    @timestamp Sun, 27 Dec 2015 08:14:58 +0000
 
     @author Patrick Head  mailto:patrickhead@gmail.com
 
@@ -134,10 +134,23 @@ void design_element_destroy(design_element_s *e)
     // Sanity check parameters.
   assert(e);
 
-  if (e->line_style) free(e->line_style);
-  if (e->fill_style) free(e->fill_style);
+  if (e->line_style)
+  {
+    free(e->line_style);
+    e->line_style = NULL;
+  }
 
-  if (e->color) color_destroy(e->color);
+  if (e->fill_style)
+  {
+    free(e->fill_style);
+    e->fill_style = NULL;
+  }
+
+  if (e->color)
+  {
+    color_destroy(e->color);
+    e->color = NULL;
+  }
 
   destroy_type(e);
 
@@ -637,7 +650,7 @@ void design_element_set_color(design_element_s *e, color_s *color)
   assert(e);
   assert(color);
   if (e->color) color_destroy(e->color);
-  e->color = color;
+  e->color = color_copy(color);
   color_set_tag(e->color, "color");
 }
 
@@ -1018,6 +1031,7 @@ static void destroy_type(design_element_s *e)
 {
   assert(e);
 
+return;
   switch (e->type)
   {
     case design_element_type_dimension:
